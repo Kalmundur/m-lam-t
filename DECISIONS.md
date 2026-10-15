@@ -5,7 +5,7 @@ Choices made where the brief left room. Newest milestone last. Anything marked *
 ## Open questions
 
 - **Open: EU referendum result.** `kerfid-0015` asks only for the date (29 August 2026), as the brief says. A question about the result needs a human to pick the source, for example the ministry's announcement after the vote.
-- **Open: contact address** for "Tilkynna villu" (`mailto:`) and the About page. Needed in M2.
+- **Open: real contact address.** "Tilkynna villu" (`mailto:`) and the About page use `CONTACT_EMAIL` in `src/config.ts`. It is the placeholder `TODO@malamot.is` until the owner supplies an address. Replace it before launch.
 
 ## M1: Skeleton
 
@@ -19,6 +19,7 @@ Choices made where the brief left room. Newest milestone last. Anything marked *
 - **`npm audit` reports 5 "high" findings.** They all come from one advisory in `braces`, pulled in through `eslint-config-next` → `fast-glob` → `micromatch`. This is dev-only lint tooling and never ships. `npm audit fix --force` would downgrade `eslint-config-next` to v14, so it's left alone until upstream updates.
 - **The AGENTS.md from create-next-app is kept.** `next dev` regenerates it anyway.
 - **UI strings live in `src/i18n/is.ts`** as a typed object. No i18n library yet; an `en.ts` with the same shape can be added later.
+- **Settings that aren't text live in `src/config.ts`**, starting with `CONTACT_EMAIL`. It is a plain constant, not an environment variable: the site is static, so the address is baked in at build time either way, and a constant is easier to find and change.
 - **Script output is in English.** It is developer tooling, and the brief puts code in English. Everything players see is in Icelandic.
 - **M1 was committed straight to `main`**, because the repository was new. Later work goes on branches with pull requests, so CI runs before merging.
 
