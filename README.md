@@ -27,7 +27,7 @@ npm run dev          # http://localhost:3000
 | `npm run dev` | Development server |
 | `npm run build` | Validates content, then builds the static site into `out/` |
 | `npm run validate` | Checks every question file; exits non-zero on any error |
-| `npm run balance` | Prints how many verified questions concern each party, per category |
+| `npm run balance` | Prints how many verified questions concern each party, per category, and warns about uneven coverage of the balance-checked parties |
 | `npm test` | Unit tests (Vitest), including a check of the real content |
 | `npm run typecheck` | TypeScript |
 | `npm run lint` | ESLint |
@@ -59,7 +59,7 @@ Never set this in production.
 ```
 content/
   questions/<category>.json   question data, one file per category
-  parties.json                party registry (list letters) used by validation and the balance report
+  parties.json                all 13 parties with list letters, flagged inAlthingi / inBalanceCheck
   retired-ids.json            ids that must never be used again
 scripts/
   validate.ts                 npm run validate
@@ -76,7 +76,7 @@ src/
 On every push to `main` and on pull requests, CI:
 
 - **fails** if any question is invalid,
-- **warns**, without failing, when a party's share of verified questions in `stefna`, `atkvaedi` or `flokkarnir` is above 1.5× or below 0.5× the category average,
+- **warns**, without failing, when a balance-checked party's share of verified questions in `stefna`, `atkvaedi` or `flokkarnir` is above 1.5× or below 0.5× the category average (only parties with `inBalanceCheck: true` in `content/parties.json` are compared),
 - runs typecheck, lint, unit tests and the static build.
 
 The balance table also appears in the job summary.

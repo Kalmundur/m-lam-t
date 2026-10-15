@@ -22,10 +22,18 @@ describe("repository content", () => {
     }
   });
 
-  it("covers every registered party evenly in flokkarnir", () => {
+  it("covers the balance-checked parties evenly in flokkarnir", () => {
     const report = computeBalance(result.questions, result.registry!.parties, TODAY);
     expect(report.warnings).toEqual([]);
-    const counts = result.registry!.parties.map((p) => report.counts[p.letter].flokkarnir);
+    const counts = report.checkedParties.map((letter) => report.counts[letter].flokkarnir);
     expect(Math.max(...counts) - Math.min(...counts)).toBeLessThanOrEqual(1);
+  });
+
+  it("asks about every registered party's list letter at least once", () => {
+    const subjects = new Set(
+      result.questions.filter((q) => q.category === "flokkarnir" && q.status === "verified").flatMap((q) => q.parties ?? []),
+    );
+    const missing = result.registry!.parties.filter((p) => !subjects.has(p.letter)).map((p) => p.letter);
+    expect(missing).toEqual([]);
   });
 });
