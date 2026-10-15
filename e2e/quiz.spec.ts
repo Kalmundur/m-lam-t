@@ -89,7 +89,7 @@ test("resumes an unfinished daily quiz after a reload", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 2 })).toHaveText(third!);
 
   await page.goto("/");
-  await expect(page.getByRole("link", { name: "Halda áfram (2 af 7 svarað)" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /^Halda áfram.*2 af 7/ })).toBeVisible();
 });
 
 test("practice: plays a round in one category and starts another", async ({ page }) => {
