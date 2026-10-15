@@ -16,12 +16,12 @@ Choices made where the brief left room. Newest milestone last. Anything marked *
 - **Node 24** (`.nvmrc`). Vitest 5 needs Node `^22.12 || >=24`, so `engines` says that, and `@types/node` is at 24.
 - **Scripts run with `tsx`** and import the same TypeScript modules as the app (`src/lib/content/`). Scripts read paths relative to the working directory, which `npm run` sets to the repo root.
 - **`npm run build` runs `validate` first** (`prebuild`), so a deploy from any host fails on invalid content. CI calls `next build` directly to avoid validating twice.
-- **CI uses `actions/checkout@v5` and `actions/setup-node@v5`.** Balance warnings and validation issues are emitted as GitHub annotations, and both scripts write a table to the job summary. CI has not run yet, because the repository has no GitHub remote. The same steps pass locally.
+- **CI uses `actions/checkout@v5` and `actions/setup-node@v5`.** Balance warnings and validation issues are emitted as GitHub annotations, and both scripts write a table to the job summary. The first run on GitHub (Kalmundur/m-lam-t) passed.
 - **`npm audit` reports 5 "high" findings.** They all come from one advisory in `braces`, pulled in through `eslint-config-next` → `fast-glob` → `micromatch`. This is dev-only lint tooling and never ships. `npm audit fix --force` would downgrade `eslint-config-next` to v14, so it's left alone until upstream updates.
 - **The AGENTS.md from create-next-app is kept.** `next dev` regenerates it anyway.
 - **UI strings live in `src/i18n/is.ts`** as a typed object. No i18n library yet; an `en.ts` with the same shape can be added later.
 - **Script output is in English.** It is developer tooling, and the brief puts code in English. Everything players see is in Icelandic.
-- **Committed straight to `main`.** The repository is new and has no remote.
+- **M1 was committed straight to `main`**, because the repository was new. Later work goes on branches with pull requests, so CI runs before merging.
 
 ### Schema and validation
 
