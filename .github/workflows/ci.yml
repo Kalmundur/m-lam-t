@@ -15,7 +15,9 @@ concurrency:
 jobs:
   check:
     name: Validate content, test and build
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest moves to Ubuntu 26 from 2026-10-19, and Playwright's
+    # --with-deps install needs an OS release it knows about.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
 
@@ -47,3 +49,10 @@ jobs:
       # so the prebuild hook would only repeat it.
       - name: Build static site
         run: npx next build
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      # Plays the daily quiz and a practice round against the static build in out/.
+      - name: End-to-end tests
+        run: npm run test:e2e

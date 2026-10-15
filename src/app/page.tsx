@@ -1,12 +1,24 @@
+import Link from "next/link";
+import { DailyCard } from "@/components/DailyCard";
 import { is } from "@/i18n/is";
 
-// Placeholder home page for M1; the real Forsíða arrives with the quiz in M2.
 export default function Home() {
   return (
-    <main className="mx-auto flex w-full max-w-md flex-1 flex-col justify-center gap-4 px-4 py-16">
-      <h1 className="text-4xl font-semibold tracking-tight">{is.app.name}</h1>
-      <p className="text-lg">{is.app.tagline}</p>
-      <p className="opacity-80">{is.home.comingSoon}</p>
-    </main>
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <h1 className="text-2xl leading-tight font-semibold">{is.app.tagline}</h1>
+        <p className="text-ink-muted">{is.home.intro}</p>
+      </div>
+      <DailyCard />
+      <section className="card flex flex-col gap-3" aria-labelledby="practice-title">
+        <h2 id="practice-title" className="text-xl font-semibold">
+          {is.home.practiceTitle}
+        </h2>
+        <p className="text-ink-muted">{is.home.practiceHint}</p>
+        <Link href="/aefing" className="button-secondary">
+          {is.home.practiceLink}
+        </Link>
+      </section>
+    </div>
   );
 }

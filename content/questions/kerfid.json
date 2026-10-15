@@ -11,8 +11,7 @@
       "min": 20,
       "max": 120,
       "unit": "þingsæti",
-      "fullTolerance": 0,
-      "partialTolerance": 0.1
+      "fullTolerance": 0
     },
     "explanation": "Kosið er um 63 þingsæti í alþingiskosningum: 54 kjördæmissæti og 9 jöfnunarsæti.",
     "sources": [
@@ -50,6 +49,7 @@
       }
     ],
     "correctOptionId": "b",
+    "keepOptionOrder": true,
     "explanation": "Kjördæmin eru sex: Norðvesturkjördæmi, Norðausturkjördæmi, Suðurkjördæmi, Suðvesturkjördæmi, Reykjavíkurkjördæmi norður og Reykjavíkurkjördæmi suður.",
     "sources": [
       {
@@ -160,6 +160,7 @@
       }
     ],
     "correctOptionId": "b",
+    "keepOptionOrder": true,
     "explanation": "Kjörtímabilið er fjögur ár og alþingiskosningar fara því að jafnaði fram á fjögurra ára fresti.",
     "sources": [
       {
@@ -229,6 +230,7 @@
       }
     ],
     "correctOptionId": "b",
+    "keepOptionOrder": true,
     "explanation": "Íslenskir ríkisborgarar sem eru 18 ára og eldri og eiga lögheimili á Íslandi þegar kosning fer fram geta kosið í alþingiskosningum.",
     "sources": [
       {
@@ -293,6 +295,7 @@
       }
     ],
     "correctOptionId": "c",
+    "keepOptionOrder": true,
     "explanation": "Kosningarrétturinn helst í 16 ár frá því að lögheimili er flutt af landinu, og lengur ef sótt er um það til Þjóðskrár Íslands.",
     "sources": [
       {
@@ -389,6 +392,7 @@
       }
     ],
     "correctOptionId": "c",
+    "keepOptionOrder": true,
     "explanation": "Núgildandi kosningalög eru lög nr. 112/2021, dagsett 25. júní 2021.",
     "sources": [
       {
@@ -425,6 +429,7 @@
       }
     ],
     "correctOptionId": "c",
+    "keepOptionOrder": true,
     "explanation": "Kosningalögin eru dagsett 25. júní 2021 en tóku gildi 1. janúar 2022.",
     "sources": [
       {
@@ -461,6 +466,7 @@
       }
     ],
     "correctOptionId": "c",
+    "keepOptionOrder": true,
     "explanation": "Kosið var til Alþingis laugardaginn 30. nóvember 2024.",
     "sources": [
       {
@@ -493,6 +499,7 @@
       }
     ],
     "correctOptionId": "b",
+    "keepOptionOrder": true,
     "explanation": "Þjóðaratkvæðagreiðsla um aðildarviðræður við Evrópusambandið fór fram 29. ágúst 2026.",
     "sources": [
       {

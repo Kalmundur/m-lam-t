@@ -1,49 +1,21 @@
 import { z } from "zod";
+import {
+  CATEGORIES,
+  CATEGORIES_REQUIRING_VALID_UNTIL,
+  QUESTION_TYPES,
+  STATUSES,
+  TRUE_FALSE_OPTION_IDS,
+  estimateStep,
+  isOnStepGrid,
+  type QuestionType,
+} from "./constants";
 
-// Shared by the app (runtime loading) and the scripts (validate, balance).
+// Shared by the build (loading the question bank) and the scripts (validate, balance).
 // Rules that only need a single question live here; rules that need the whole
-// question set or the party registry live in validate.ts.
+// question set or the party registry live in validate.ts. Client components
+// should import from constants.ts instead, so Zod stays out of the browser bundle.
 
-export const CATEGORIES = [
-  "kerfid",
-  "flokkarnir",
-  "stefna",
-  "atkvaedi",
-  "tolur",
-  "folkid",
-] as const;
-export type Category = (typeof CATEGORIES)[number];
-
-export const QUESTION_TYPES = [
-  "multiple_choice",
-  "who_promised",
-  "vote_record",
-  "estimate",
-  "true_false",
-] as const;
-export type QuestionType = (typeof QUESTION_TYPES)[number];
-
-export const STATUSES = ["verified", "placeholder"] as const;
-export type Status = (typeof STATUSES)[number];
-
-/** Estimate tolerances, as a fraction of the correct answer (0.1 = ±10%). */
-export const DEFAULT_FULL_TOLERANCE = 0.1;
-export const DEFAULT_PARTIAL_TOLERANCE = 0.25;
-
-/** A true_false question must use exactly these option ids, in this order. */
-export const TRUE_FALSE_OPTION_IDS = ["true", "false"] as const;
-
-/**
- * Pseudo-party ids for placeholder questions, so placeholders never attribute
- * made-up positions or votes to a real party. Verified questions may not use them.
- */
-export const PLACEHOLDER_PARTY_IDS = ["X1", "X2", "X3"] as const;
-
-/** reviewedBy value for seed questions that still need a human sign-off. */
-export const PENDING_REVIEWER = "pending-human";
-
-/** Categories whose facts change over time and therefore need validUntil. */
-export const CATEGORIES_REQUIRING_VALID_UNTIL: readonly Category[] = ["folkid"];
+export * from "./constants";
 
 const OPTION_COUNT: Record<Exclude<QuestionType, "estimate">, [number, number]> = {
   multiple_choice: [3, 4],
@@ -74,28 +46,23 @@ export const EstimateSchema = z
     min: z.number(),
     max: z.number(),
     unit: z.string(),
+    /** Slider step; defaults to estimateStep(). */
+    step: z.number().positive().optional(),
+    /** A guess within this fraction of the answer is correct (default 0.1); anything else is wrong. */
     fullTolerance: z.number().min(0).max(1).optional(),
-    partialTolerance: z.number().min(0).max(1).optional(),
   })
   .superRefine((e, ctx) => {
+    const issue = (path: string, message: string) => ctx.addIssue({ code: "custom", path: [path], message });
     if (e.min >= e.max) {
-      ctx.addIssue({ code: "custom", path: ["max"], message: "max must be greater than min" });
+      issue("max", "max must be greater than min");
+      return;
     }
-    if (e.answer < e.min || e.answer > e.max) {
-      ctx.addIssue({ code: "custom", path: ["answer"], message: "answer must lie between min and max" });
-    }
-    if (e.answer === 0) {
-      // Tolerances are relative to the answer, so 0 would only accept an exact hit.
-      ctx.addIssue({ code: "custom", path: ["answer"], message: "answer must not be 0 (tolerances are relative)" });
-    }
-    const full = e.fullTolerance ?? DEFAULT_FULL_TOLERANCE;
-    const partial = e.partialTolerance ?? DEFAULT_PARTIAL_TOLERANCE;
-    if (full > partial) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["fullTolerance"],
-        message: `fullTolerance (${full}) must not exceed partialTolerance (${partial})`,
-      });
+    if (e.answer < e.min || e.answer > e.max) issue("answer", "answer must lie between min and max");
+    // Tolerances are relative to the answer, so 0 would only accept an exact hit.
+    if (e.answer === 0) issue("answer", "answer must not be 0 (tolerances are relative)");
+    if (e.step !== undefined && e.step > e.max - e.min) issue("step", "step must not exceed max - min");
+    if (!isOnStepGrid(e.answer, e)) {
+      issue("answer", `answer is not reachable on the slider (min ${e.min}, step ${estimateStep(e)})`);
     }
   });
 export type Estimate = z.infer<typeof EstimateSchema>;
@@ -108,6 +75,8 @@ export const QuestionSchema = z
     prompt: nonEmpty,
     options: z.array(OptionSchema).optional(),
     correctOptionId: nonEmpty.optional(),
+    /** Show options in file order instead of shuffling (numbers, dates, Já/Nei/Sat hjá). */
+    keepOptionOrder: z.boolean().optional(),
     estimate: EstimateSchema.optional(),
     explanation: nonEmpty,
     sources: z.array(SourceSchema),
@@ -138,6 +107,7 @@ export const QuestionSchema = z
       if (!q.estimate) issue(["estimate"], "estimate questions need an estimate block");
       if (q.options) issue(["options"], "estimate questions must not have options");
       if (q.correctOptionId) issue(["correctOptionId"], "estimate questions must not have correctOptionId");
+      if (q.keepOptionOrder !== undefined) issue(["keepOptionOrder"], "estimate questions have no options to order");
       return;
     }
 

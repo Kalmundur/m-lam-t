@@ -145,15 +145,32 @@ describe("QuestionSchema", () => {
       expect(messages(estimateQuestion({ answer: 50, min: 100, max: 20, unit: "" }))).toContain(
         "estimate.max: max must be greater than min",
       );
+      expect(messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", fullTolerance: 0.3 }))).toEqual([]);
+      expect(messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", fullTolerance: 1.5 }))).toHaveLength(1);
+    });
+
+    it("rejects partialTolerance, since estimates score full or nothing", () => {
       expect(
-        messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", fullTolerance: 0.3, partialTolerance: 0.2 })),
-      ).toEqual(["estimate.fullTolerance: fullTolerance (0.3) must not exceed partialTolerance (0.2)"]);
-      // Only fullTolerance given: compared against the default partial tolerance (0.25).
-      expect(messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", fullTolerance: 0.3 }))).toHaveLength(1);
+        messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", fullTolerance: 0, partialTolerance: 0.1 })),
+      ).toEqual([expect.stringMatching(/Unrecognized key: "partialTolerance"/)]);
     });
 
     it("rejects an answer of 0, since tolerances are relative", () => {
       expect(messages(estimateQuestion({ answer: 0, min: -10, max: 10, unit: "" }))).toHaveLength(1);
+    });
+
+    it("requires the answer to be reachable on the slider", () => {
+      expect(messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", step: 2 }))).toEqual([
+        "estimate.answer: answer is not reachable on the slider (min 20, step 2)",
+      ]);
+      // 0–3000 gets a default step of 10.
+      expect(messages(estimateQuestion({ answer: 1005, min: 0, max: 3000, unit: "" }))).toHaveLength(1);
+      expect(messages(estimateQuestion({ answer: 1000, min: 0, max: 3000, unit: "" }))).toEqual([]);
+    });
+
+    it("rejects keepOptionOrder, since there are no options", () => {
+      const q = { ...estimateQuestion({ answer: 63, min: 20, max: 120, unit: "" }), keepOptionOrder: true };
+      expect(messages(q)).toEqual(["keepOptionOrder: estimate questions have no options to order"]);
     });
   });
 });

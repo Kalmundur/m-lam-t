@@ -9,7 +9,7 @@ Málamót is a knowledge quiz, not a vote matcher. It never tells players which 
 | Milestone | State |
 |---|---|
 | M1 Skeleton: stack, schema, validator, balance report, CI, seed content | done |
-| M2 Playable quiz: daily quiz, practice, all question types | not started |
+| M2 Playable quiz: daily quiz, practice, all question types | done |
 | M3 Polish: share card, streaks, About page, accessibility | not started |
 | M4 Alþingi open-data prototype | not started |
 
@@ -28,7 +28,9 @@ npm run dev          # http://localhost:3000
 | `npm run build` | Validates content, then builds the static site into `out/` |
 | `npm run validate` | Checks every question file; exits non-zero on any error |
 | `npm run balance` | Prints how many verified questions concern each party, per category, and warns about uneven coverage of the balance-checked parties |
+| `npm run serve` | Serves the built `out/` folder at http://localhost:3000, like a static host would |
 | `npm test` | Unit tests (Vitest), including a check of the real content |
+| `npm run test:e2e` | Playwright end-to-end tests against the built site (run `npm run build` first) |
 | `npm run typecheck` | TypeScript |
 | `npm run lint` | ESLint |
 
@@ -36,9 +38,22 @@ npm run dev          # http://localhost:3000
 
 The build is a plain static site with no server. Any static host can serve `out/`; none is wired up yet.
 
+The first time you run the end-to-end tests, install the browser with `npx playwright install chromium`.
+
+### Pages
+
+| Path | Screen |
+|---|---|
+| `/` | Forsíða: today's date and the daily quiz (start, continue or see the result) |
+| `/dagsins` | Dagsins próf: 7 questions, the same for everyone that day, one attempt per device |
+| `/aefing` | Æfing: pick a category |
+| `/aefing/<category>` | Practice round of up to 10 random questions |
+
+Progress is kept in the browser's `localStorage` only. There are no accounts and nothing is sent anywhere.
+
 ### Placeholders
 
-Only `verified` questions are shown to players. To preview placeholder questions locally (marked with a "SÝNISHORN" badge, from M2):
+Only `verified` questions are shown to players. To preview placeholder questions locally, marked with a "SÝNISHORN" badge:
 
 ```bash
 NEXT_PUBLIC_SHOW_PLACEHOLDERS=true npm run dev
@@ -61,15 +76,19 @@ content/
   questions/<category>.json   question data, one file per category
   parties.json                all 13 parties with list letters, flagged inAlthingi / inBalanceCheck
   retired-ids.json            ids that must never be used again
+e2e/                          Playwright tests: daily quiz, resume, practice
 scripts/
   validate.ts                 npm run validate
   balance-report.ts           npm run balance
+  serve-static.ts             npm run serve
 src/
   app/                        Next.js App Router pages
-  config.ts                   project settings, e.g. CONTACT_EMAIL (placeholder TODO@malamot.is)
+  components/                 quiz screens (question card, results, daily and practice flows)
+  config.ts                   project settings: CONTACT_EMAIL (placeholder TODO@malamot.is), SHOW_PLACEHOLDERS
   i18n/is.ts                  all Icelandic UI text
   lib/content/                Zod schema, validation, availability and balance logic (shared by app and scripts)
-.github/workflows/ci.yml      validate (fails), balance (warns), typecheck, lint, test, build
+  lib/quiz/                   question selection, scoring, stored daily progress
+.github/workflows/ci.yml      validate (fails), balance (warns), typecheck, lint, test, build, end-to-end
 ```
 
 ## Continuous integration
@@ -78,7 +97,7 @@ On every push to `main` and on pull requests, CI:
 
 - **fails** if any question is invalid,
 - **warns**, without failing, when a balance-checked party's share of verified questions in `stefna`, `atkvaedi` or `flokkarnir` is above 1.5× or below 0.5× the category average (only parties with `inBalanceCheck: true` in `content/parties.json` are compared),
-- runs typecheck, lint, unit tests and the static build.
+- runs typecheck, lint, unit tests, the static build, and the end-to-end tests against that build.
 
 The balance table also appears in the job summary.
 
