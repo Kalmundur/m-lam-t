@@ -24,6 +24,21 @@ For everyone who writes or reviews Málamót questions. The app only works if pl
 - **Write explanations to inform, not to judge.** One or two sentences: the fact, and enough context to make it stick. Don't start with "Rétt!" or "Rangt!", because the app already shows that.
 - **Write in balanced sets where you can.** For example, one `stefna` question per party on the same topic (housing, health, EU). That keeps the balance even and makes each question easier to check for fairness.
 
+## The party registry
+
+`content/parties.json` lists every organisation that holds a list letter on the Landskjörstjórn page, spelled exactly as that page spells it. Each party has:
+
+| Field | Meaning |
+|---|---|
+| `letter`, `name` | As Landskjörstjórn lists them |
+| `shortName` | Optional shorter display name, e.g. "Samfylkingin" |
+| `inAlthingi` | The party holds seats in Alþingi |
+| `inBalanceCheck` | `npm run balance` includes the party in its averages and warnings |
+
+Questions may refer to any party in the registry. The balance check only covers parties with `inBalanceCheck: true`. That is currently the six parties with seats; more will be added when candidate lists for the 2028 election are known. Parties outside the check still show up in the balance table, so you can see which ones have few questions.
+
+When a party registers, dissolves, wins or loses seats, update the registry and its `sources` in the same pull request. List-letter questions about a party that has dissolved should get a `validUntil`.
+
 ## Choosing sources
 
 Use primary sources whenever they exist:
