@@ -55,6 +55,7 @@
       }
     ],
     "correctOptionId": "b",
+    "keepOptionOrder": true,
     "explanation": "[Fjöldi þingsæta og heimild, t.d. Landskjörstjórn.]",
     "sources": [],
     "parties": [

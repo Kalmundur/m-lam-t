@@ -155,5 +155,19 @@ describe("QuestionSchema", () => {
     it("rejects an answer of 0, since tolerances are relative", () => {
       expect(messages(estimateQuestion({ answer: 0, min: -10, max: 10, unit: "" }))).toHaveLength(1);
     });
+
+    it("requires the answer to be reachable on the slider", () => {
+      expect(messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", step: 2 }))).toEqual([
+        "estimate.answer: answer is not reachable on the slider (min 20, step 2)",
+      ]);
+      // 0–3000 gets a default step of 10.
+      expect(messages(estimateQuestion({ answer: 1005, min: 0, max: 3000, unit: "" }))).toHaveLength(1);
+      expect(messages(estimateQuestion({ answer: 1000, min: 0, max: 3000, unit: "" }))).toEqual([]);
+    });
+
+    it("rejects keepOptionOrder, since there are no options", () => {
+      const q = { ...estimateQuestion({ answer: 63, min: 20, max: 120, unit: "" }), keepOptionOrder: true };
+      expect(messages(q)).toEqual(["keepOptionOrder: estimate questions have no options to order"]);
+    });
   });
 });

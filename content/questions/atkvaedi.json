@@ -17,6 +17,7 @@
       }
     ],
     "correctOptionId": "samthykkt",
+    "keepOptionOrder": true,
     "explanation": "[Úrslitin, t.d. „Samþykkt með [X] atkvæðum gegn [Y]“, með tengli á atkvæðagreiðsluna á althingi.is.]",
     "sources": []
   },
@@ -42,6 +43,7 @@
       }
     ],
     "correctOptionId": "nei",
+    "keepOptionOrder": true,
     "explanation": "[Hvernig þingflokkurinn greiddi atkvæði og hvar það kemur fram.]",
     "sources": [],
     "parties": [
