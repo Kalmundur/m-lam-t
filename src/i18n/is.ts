@@ -37,6 +37,24 @@ export const is = {
   },
   categories,
   questionTypes,
+  // Spelled out rather than taken from Intl, because some browsers ship without Icelandic locale data.
+  dates: {
+    weekdays: ["sunnudagur", "mánudagur", "þriðjudagur", "miðvikudagur", "fimmtudagur", "föstudagur", "laugardagur"],
+    months: [
+      "janúar",
+      "febrúar",
+      "mars",
+      "apríl",
+      "maí",
+      "júní",
+      "júlí",
+      "ágúst",
+      "september",
+      "október",
+      "nóvember",
+      "desember",
+    ],
+  },
   home: {
     intro: "Spurningar um flokkana, stefnumálin, atkvæðagreiðslur og kosningakerfið. Hverju svari fylgir útskýring og heimild.",
     dailyTitle: "Dagsins próf",
@@ -84,6 +102,7 @@ export const is = {
     yourMark: "Þitt svar",
     sources: "Heimildir",
     noSources: "Engin heimild (sýnishorn).",
+    opensInNewTab: "(opnast í nýjum flipa)",
     reportError: "Tilkynna villu",
     reportSubject: (id: string) => `Villa í spurningu ${id}`,
     reportBody: (id: string) => `Spurning: ${id}\n\nHvað er rangt, og hver er rétta heimildin?\n\n`,
@@ -92,6 +111,7 @@ export const is = {
     title: "Niðurstöður",
     dailyTitle: (date: string) => `Dagsins próf, ${date}`,
     score: (points: string, max: number) => `${points} af ${max}`,
+    outOf: (max: number) => ` af ${max}`,
     headline: (ratio: number) =>
       ratio === 1
         ? "Fullt hús! Glæsilegt."

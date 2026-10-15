@@ -13,7 +13,24 @@ describe("Icelandic formatting", () => {
   it("formats numbers with Icelandic separators", () => {
     expect(formatNumber(63)).toBe("63");
     expect(formatNumber(5.5)).toBe("5,5");
-    expect(formatNumber(1234567)).toBe("1.234.567");
+    expect(formatNumber(1000)).toBe("1.000");
+    expect(formatNumber(1234567.25)).toBe("1.234.567,25");
+    expect(formatNumber(-1500)).toBe("-1.500");
+    expect(formatNumber(0.1 + 0.2)).toBe("0,3");
+  });
+
+  it("covers every weekday and month", () => {
+    const days = Array.from({ length: 7 }, (_, i) => formatLongDate(`2026-10-${String(11 + i).padStart(2, "0")}`));
+    expect(days.map((d) => d.split(" ")[0])).toEqual([
+      "sunnudagur",
+      "mánudagur",
+      "þriðjudagur",
+      "miðvikudagur",
+      "fimmtudagur",
+      "föstudagur",
+      "laugardagur",
+    ]);
+    expect(formatLongDate("2026-12-31")).toBe("fimmtudagur 31. desember");
   });
 });
 
