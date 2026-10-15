@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Validate content, test and build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      # Fails the job if any question is invalid.
+      - name: Validate questions
+        run: npm run validate
+
+      # Never fails: unbalanced party coverage shows up as warning annotations.
+      - name: Party balance report
+        run: npm run balance
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Unit tests
+        run: npm test
+
+      # `npx next build` rather than `npm run build`: validation already ran above,
+      # so the prebuild hook would only repeat it.
+      - name: Build static site
+        run: npx next build
