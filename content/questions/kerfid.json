@@ -1,0 +1,506 @@
+[
+  {
+    "id": "kerfid-0001",
+    "type": "estimate",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hversu mörg þingsæti eru á Alþingi?",
+    "estimate": {
+      "answer": 63,
+      "min": 20,
+      "max": 120,
+      "unit": "þingsæti",
+      "fullTolerance": 0,
+      "partialTolerance": 0.1
+    },
+    "explanation": "Kosið er um 63 þingsæti í alþingiskosningum: 54 kjördæmissæti og 9 jöfnunarsæti.",
+    "sources": [
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0002",
+    "type": "multiple_choice",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Í hve mörg kjördæmi er landinu skipt í alþingiskosningum?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Fjögur"
+      },
+      {
+        "id": "b",
+        "text": "Sex"
+      },
+      {
+        "id": "c",
+        "text": "Átta"
+      },
+      {
+        "id": "d",
+        "text": "Tíu"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "Kjördæmin eru sex: Norðvesturkjördæmi, Norðausturkjördæmi, Suðurkjördæmi, Suðvesturkjördæmi, Reykjavíkurkjördæmi norður og Reykjavíkurkjördæmi suður.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0003",
+    "type": "true_false",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Reykjavík er eitt kjördæmi í alþingiskosningum.",
+    "options": [
+      {
+        "id": "true",
+        "text": "Satt"
+      },
+      {
+        "id": "false",
+        "text": "Ósatt"
+      }
+    ],
+    "correctOptionId": "false",
+    "explanation": "Reykjavík skiptist í tvö kjördæmi: Reykjavíkurkjördæmi norður og Reykjavíkurkjördæmi suður.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0004",
+    "type": "multiple_choice",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvernig er þingsætum úthlutað í alþingiskosningum?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Sá flokkur sem fær flest atkvæði á landsvísu fær öll sætin"
+      },
+      {
+        "id": "b",
+        "text": "Í hlutfalli við atkvæðin sem flokkarnir fá"
+      },
+      {
+        "id": "c",
+        "text": "Sá frambjóðandi sem fær flest atkvæði í hverju einmenningskjördæmi fær sætið"
+      },
+      {
+        "id": "d",
+        "text": "Sætunum er skipt jafnt milli allra flokka sem bjóða fram"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "Kosið er í hlutfallskosningum, sem þýðir að flokkarnir fá þingsætum úthlutað í hlutfalli við atkvæðin sem þeim eru greidd.",
+    "sources": [
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0005",
+    "type": "multiple_choice",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hve langt er kjörtímabil Alþingis?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Þrjú ár"
+      },
+      {
+        "id": "b",
+        "text": "Fjögur ár"
+      },
+      {
+        "id": "c",
+        "text": "Fimm ár"
+      },
+      {
+        "id": "d",
+        "text": "Sex ár"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "Kjörtímabilið er fjögur ár og alþingiskosningar fara því að jafnaði fram á fjögurra ára fresti.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0006",
+    "type": "true_false",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 2,
+    "prompt": "Ef Alþingi er rofið fara alþingiskosningar fram þann dag sem þingrofið tekur gildi.",
+    "options": [
+      {
+        "id": "true",
+        "text": "Satt"
+      },
+      {
+        "id": "false",
+        "text": "Ósatt"
+      }
+    ],
+    "correctOptionId": "true",
+    "explanation": "Kjörtímabilið er að jafnaði fjögur ár, en sé Alþingi rofið fara kosningar fram þann dag sem þingrofið tekur gildi.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0007",
+    "type": "multiple_choice",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hver er kosningaaldur í alþingiskosningum?",
+    "options": [
+      {
+        "id": "a",
+        "text": "16 ára"
+      },
+      {
+        "id": "b",
+        "text": "18 ára"
+      },
+      {
+        "id": "c",
+        "text": "20 ára"
+      },
+      {
+        "id": "d",
+        "text": "21 árs"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "Íslenskir ríkisborgarar sem eru 18 ára og eldri og eiga lögheimili á Íslandi þegar kosning fer fram geta kosið í alþingiskosningum.",
+    "sources": [
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0008",
+    "type": "true_false",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 2,
+    "prompt": "Allir sem eru 18 ára og eiga lögheimili á Íslandi mega kjósa í alþingiskosningum, óháð ríkisfangi.",
+    "options": [
+      {
+        "id": "true",
+        "text": "Satt"
+      },
+      {
+        "id": "false",
+        "text": "Ósatt"
+      }
+    ],
+    "correctOptionId": "false",
+    "explanation": "Kosningarréttur í alþingiskosningum fylgir íslenskum ríkisborgararétti. Íslenskir ríkisborgarar 18 ára og eldri með lögheimili á Íslandi geta kosið.",
+    "sources": [
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0009",
+    "type": "multiple_choice",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 2,
+    "prompt": "Íslenskir ríkisborgarar sem flytja til útlanda halda kosningarrétti sínum um tíma án þess að sækja sérstaklega um það. Hve lengi?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Í 4 ár"
+      },
+      {
+        "id": "b",
+        "text": "Í 8 ár"
+      },
+      {
+        "id": "c",
+        "text": "Í 16 ár"
+      },
+      {
+        "id": "d",
+        "text": "Þeir missa hann strax við flutning"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "Kosningarrétturinn helst í 16 ár frá því að lögheimili er flutt af landinu, og lengur ef sótt er um það til Þjóðskrár Íslands.",
+    "sources": [
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0010",
+    "type": "multiple_choice",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 2,
+    "prompt": "Hverjir af eftirtöldum eru ekki kjörgengir til Alþingis?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Sveitarstjórnarfulltrúar"
+      },
+      {
+        "id": "b",
+        "text": "Kennarar"
+      },
+      {
+        "id": "c",
+        "text": "Hæstaréttardómarar"
+      },
+      {
+        "id": "d",
+        "text": "Læknar"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "Hæstaréttardómarar og forseti Íslands eru ekki kjörgengir til Alþingis, því það samræmist ekki kröfunni um þrískiptingu ríkisvaldsins að þeir eigi sæti á þingi.",
+    "sources": [
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0011",
+    "type": "true_false",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Forseti Íslands getur jafnframt setið á Alþingi sem þingmaður.",
+    "options": [
+      {
+        "id": "true",
+        "text": "Satt"
+      },
+      {
+        "id": "false",
+        "text": "Ósatt"
+      }
+    ],
+    "correctOptionId": "false",
+    "explanation": "Forseti Íslands og hæstaréttardómarar eru ekki kjörgengir til Alþingis. Það samræmist ekki kröfunni um þrískiptingu ríkisvaldsins að þeir eigi sæti á þingi.",
+    "sources": [
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0012",
+    "type": "multiple_choice",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 3,
+    "prompt": "Hvaða númer bera núgildandi kosningalög?",
+    "options": [
+      {
+        "id": "a",
+        "text": "Lög nr. 33/1944"
+      },
+      {
+        "id": "b",
+        "text": "Lög nr. 24/2000"
+      },
+      {
+        "id": "c",
+        "text": "Lög nr. 112/2021"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "Núgildandi kosningalög eru lög nr. 112/2021, dagsett 25. júní 2021.",
+    "sources": [
+      {
+        "title": "Kosningalög nr. 112/2021 – Lagasafn Alþingis",
+        "url": "https://www.althingi.is/lagas/nuna/2021112.html",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0013",
+    "type": "multiple_choice",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 3,
+    "prompt": "Hvenær tóku núgildandi kosningalög, nr. 112/2021, gildi?",
+    "options": [
+      {
+        "id": "a",
+        "text": "1. janúar 2021"
+      },
+      {
+        "id": "b",
+        "text": "25. júní 2021"
+      },
+      {
+        "id": "c",
+        "text": "1. janúar 2022"
+      },
+      {
+        "id": "d",
+        "text": "1. janúar 2024"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "Kosningalögin eru dagsett 25. júní 2021 en tóku gildi 1. janúar 2022.",
+    "sources": [
+      {
+        "title": "Kosningalög nr. 112/2021 – Lagasafn Alþingis",
+        "url": "https://www.althingi.is/lagas/nuna/2021112.html",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0014",
+    "type": "multiple_choice",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvaða dag fóru alþingiskosningarnar 2024 fram?",
+    "options": [
+      {
+        "id": "a",
+        "text": "28. september 2024"
+      },
+      {
+        "id": "b",
+        "text": "26. október 2024"
+      },
+      {
+        "id": "c",
+        "text": "30. nóvember 2024"
+      },
+      {
+        "id": "d",
+        "text": "14. desember 2024"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "Kosið var til Alþingis laugardaginn 30. nóvember 2024.",
+    "sources": [
+      {
+        "title": "Elections to the Icelandic parliament, Alþingi – Parliamentary elections 2024 (island.is)",
+        "url": "https://island.is/en/p/parliamentary-elections-2024/news/elections-to-the-icelandic-parliament-althingi",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "kerfid-0015",
+    "type": "multiple_choice",
+    "category": "kerfid",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvenær fór fram þjóðaratkvæðagreiðsla um aðildarviðræður við Evrópusambandið (ESB)?",
+    "options": [
+      {
+        "id": "a",
+        "text": "13. júní 2026"
+      },
+      {
+        "id": "b",
+        "text": "29. ágúst 2026"
+      },
+      {
+        "id": "c",
+        "text": "26. september 2026"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "Þjóðaratkvæðagreiðsla um aðildarviðræður við Evrópusambandið fór fram 29. ágúst 2026.",
+    "sources": [
+      {
+        "title": "Utankjörfundaratkvæðagreiðsla erlendis vegna komandi þjóðaratkvæðagreiðslu um aðildarviðræður við ESB – Stjórnarráðið",
+        "url": "https://www.stjornarradid.is/efst-a-baugi/frettir/stok-frett/2026/07/21/Utankjorfundaratkvaedagreidsla-erlendis-vegna-komandi-thjodaratkvaedagreidslu-um-adildarvidraedur-vid-ESB/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "reviewedBy": "pending-human"
+  }
+]

@@ -1,0 +1,83 @@
+[
+  {
+    "id": "folkid-0001",
+    "type": "multiple_choice",
+    "category": "folkid",
+    "status": "placeholder",
+    "difficulty": 1,
+    "prompt": "Hver gegnir embætti [heiti embættis]?",
+    "options": [
+      {
+        "id": "a",
+        "text": "[Nafn A]"
+      },
+      {
+        "id": "b",
+        "text": "[Nafn B]"
+      },
+      {
+        "id": "c",
+        "text": "[Nafn C]"
+      }
+    ],
+    "correctOptionId": "a",
+    "explanation": "[Hver gegnir embættinu og frá hvaða tíma, með heimild.]",
+    "sources": [],
+    "validUntil": "2027-12-31"
+  },
+  {
+    "id": "folkid-0002",
+    "type": "multiple_choice",
+    "category": "folkid",
+    "status": "placeholder",
+    "difficulty": 1,
+    "prompt": "Hver er formaður [Flokks X]?",
+    "options": [
+      {
+        "id": "a",
+        "text": "[Nafn A]"
+      },
+      {
+        "id": "b",
+        "text": "[Nafn B]"
+      },
+      {
+        "id": "c",
+        "text": "[Nafn C]"
+      },
+      {
+        "id": "d",
+        "text": "[Nafn D]"
+      }
+    ],
+    "correctOptionId": "c",
+    "explanation": "[Hver er formaður og hvenær formaðurinn var kjörinn, með heimild.]",
+    "sources": [],
+    "parties": [
+      "X1"
+    ],
+    "validUntil": "2027-12-31"
+  },
+  {
+    "id": "folkid-0003",
+    "type": "true_false",
+    "category": "folkid",
+    "status": "placeholder",
+    "difficulty": 2,
+    "prompt": "[Nafn] er [heiti embættis, t.d. forseti Alþingis].",
+    "options": [
+      {
+        "id": "true",
+        "text": "Satt"
+      },
+      {
+        "id": "false",
+        "text": "Ósatt"
+      }
+    ],
+    "correctOptionId": "true",
+    "explanation": "[Útskýring með heimild.]",
+    "sources": [],
+    "validUntil": "2027-12-31"
+  }
+]

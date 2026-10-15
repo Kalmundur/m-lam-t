@@ -1,0 +1,64 @@
+[
+  {
+    "id": "tolur-0001",
+    "type": "estimate",
+    "category": "tolur",
+    "status": "placeholder",
+    "difficulty": 2,
+    "prompt": "Hver var kjörsókn í alþingiskosningunum [ÁÁÁÁ]?",
+    "estimate": {
+      "answer": 80,
+      "min": 50,
+      "max": 100,
+      "unit": "%",
+      "fullTolerance": 0.03,
+      "partialTolerance": 0.08
+    },
+    "explanation": "[Kjörsóknin og heimild, t.d. Hagstofa Íslands.]",
+    "sources": []
+  },
+  {
+    "id": "tolur-0002",
+    "type": "estimate",
+    "category": "tolur",
+    "status": "placeholder",
+    "difficulty": 3,
+    "prompt": "Hver eru heildarútgjöld ríkissjóðs samkvæmt fjárlögum ársins [ÁÁÁÁ], í milljörðum króna?",
+    "estimate": {
+      "answer": 1000,
+      "min": 0,
+      "max": 3000,
+      "unit": "ma. kr."
+    },
+    "explanation": "[Upphæðin og heimild, t.d. fjárlög á althingi.is eða stjornarradid.is.]",
+    "sources": []
+  },
+  {
+    "id": "tolur-0003",
+    "type": "multiple_choice",
+    "category": "tolur",
+    "status": "placeholder",
+    "difficulty": 2,
+    "prompt": "Hversu mörg þingsæti fékk [Flokkur X] í alþingiskosningunum [ÁÁÁÁ]?",
+    "options": [
+      {
+        "id": "a",
+        "text": "[Tala A]"
+      },
+      {
+        "id": "b",
+        "text": "[Tala B]"
+      },
+      {
+        "id": "c",
+        "text": "[Tala C]"
+      }
+    ],
+    "correctOptionId": "b",
+    "explanation": "[Fjöldi þingsæta og heimild, t.d. Landskjörstjórn.]",
+    "sources": [],
+    "parties": [
+      "X1"
+    ]
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "stefna-0001",
+    "type": "who_promised",
+    "category": "stefna",
+    "status": "placeholder",
+    "difficulty": 2,
+    "prompt": "[Nafnlaus tilvitnun eða endursögn úr stefnuskrá, t.d. „Við ætlum að [stefnumál] fyrir árið [ÁÁÁÁ].“] Hvaða flokkur lofaði þessu?",
+    "options": [
+      {
+        "id": "X1",
+        "text": "[Flokkur X]"
+      },
+      {
+        "id": "X2",
+        "text": "[Flokkur Y]"
+      },
+      {
+        "id": "X3",
+        "text": "[Flokkur Z]"
+      }
+    ],
+    "correctOptionId": "X2",
+    "explanation": "[Ein til tvær setningar: hvar og hvenær flokkurinn setti þetta fram, t.d. í stefnuskrá fyrir kosningarnar [ÁÁÁÁ].]",
+    "sources": [],
+    "parties": [
+      "X2"
+    ]
+  },
+  {
+    "id": "stefna-0002",
+    "type": "who_promised",
+    "category": "stefna",
+    "status": "placeholder",
+    "difficulty": 2,
+    "prompt": "[Endursögn á kosningaloforði, án nafns flokksins.] Hvaða flokkur lofaði þessu?",
+    "options": [
+      {
+        "id": "X1",
+        "text": "[Flokkur X]"
+      },
+      {
+        "id": "X2",
+        "text": "[Flokkur Y]"
+      },
+      {
+        "id": "X3",
+        "text": "[Flokkur Z]"
+      }
+    ],
+    "correctOptionId": "X3",
+    "explanation": "[Hvar loforðið kemur fram, með tengli á stefnuskrá flokksins.]",
+    "sources": [],
+    "parties": [
+      "X3"
+    ]
+  },
+  {
+    "id": "stefna-0003",
+    "type": "true_false",
+    "category": "stefna",
+    "status": "placeholder",
+    "difficulty": 1,
+    "prompt": "[Flokkur X] hefur lagt til [stefnumál].",
+    "options": [
+      {
+        "id": "true",
+        "text": "Satt"
+      },
+      {
+        "id": "false",
+        "text": "Ósatt"
+      }
+    ],
+    "correctOptionId": "true",
+    "explanation": "[Útskýring með tilvísun í stefnuskrá eða þingmál.]",
+    "sources": [],
+    "parties": [
+      "X1"
+    ]
+  }
+]

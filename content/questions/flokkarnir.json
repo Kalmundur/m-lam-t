@@ -1,0 +1,398 @@
+[
+  {
+    "id": "flokkarnir-0001",
+    "type": "multiple_choice",
+    "category": "flokkarnir",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvaða stjórnmálasamtök hafa listabókstafinn B?",
+    "options": [
+      {
+        "id": "B",
+        "text": "Framsóknarflokkur"
+      },
+      {
+        "id": "D",
+        "text": "Sjálfstæðisflokkur"
+      },
+      {
+        "id": "M",
+        "text": "Miðflokkurinn"
+      },
+      {
+        "id": "S",
+        "text": "Samfylkingin"
+      }
+    ],
+    "correctOptionId": "B",
+    "explanation": "Framsóknarflokkur hefur fengið úthlutað listabókstafnum B. Á kjörseðlinum merkja kjósendur X fyrir framan bókstaf listans sem þeir kjósa.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "parties": [
+      "B"
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "flokkarnir-0002",
+    "type": "multiple_choice",
+    "category": "flokkarnir",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvaða listabókstaf hefur Viðreisn?",
+    "options": [
+      {
+        "id": "V",
+        "text": "V"
+      },
+      {
+        "id": "C",
+        "text": "C"
+      },
+      {
+        "id": "F",
+        "text": "F"
+      },
+      {
+        "id": "P",
+        "text": "P"
+      }
+    ],
+    "correctOptionId": "C",
+    "explanation": "Viðreisn hefur fengið úthlutað listabókstafnum C. Á kjörseðlinum merkja kjósendur X fyrir framan bókstaf listans sem þeir kjósa.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "parties": [
+      "C"
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "flokkarnir-0003",
+    "type": "multiple_choice",
+    "category": "flokkarnir",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvaða stjórnmálasamtök hafa listabókstafinn D?",
+    "options": [
+      {
+        "id": "S",
+        "text": "Samfylkingin"
+      },
+      {
+        "id": "B",
+        "text": "Framsóknarflokkur"
+      },
+      {
+        "id": "D",
+        "text": "Sjálfstæðisflokkur"
+      },
+      {
+        "id": "J",
+        "text": "Sósíalistaflokkur Íslands"
+      }
+    ],
+    "correctOptionId": "D",
+    "explanation": "Sjálfstæðisflokkur hefur fengið úthlutað listabókstafnum D. Á kjörseðlinum merkja kjósendur X fyrir framan bókstaf listans sem þeir kjósa.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "parties": [
+      "D"
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "flokkarnir-0004",
+    "type": "multiple_choice",
+    "category": "flokkarnir",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvaða listabókstaf hefur Flokkur fólksins?",
+    "options": [
+      {
+        "id": "M",
+        "text": "M"
+      },
+      {
+        "id": "V",
+        "text": "V"
+      },
+      {
+        "id": "C",
+        "text": "C"
+      },
+      {
+        "id": "F",
+        "text": "F"
+      }
+    ],
+    "correctOptionId": "F",
+    "explanation": "Flokkur fólksins hefur fengið úthlutað listabókstafnum F. Á kjörseðlinum merkja kjósendur X fyrir framan bókstaf listans sem þeir kjósa.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "parties": [
+      "F"
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "flokkarnir-0005",
+    "type": "multiple_choice",
+    "category": "flokkarnir",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvaða stjórnmálasamtök hafa listabókstafinn J?",
+    "options": [
+      {
+        "id": "J",
+        "text": "Sósíalistaflokkur Íslands"
+      },
+      {
+        "id": "P",
+        "text": "Píratar"
+      },
+      {
+        "id": "B",
+        "text": "Framsóknarflokkur"
+      },
+      {
+        "id": "D",
+        "text": "Sjálfstæðisflokkur"
+      }
+    ],
+    "correctOptionId": "J",
+    "explanation": "Sósíalistaflokkur Íslands hefur fengið úthlutað listabókstafnum J. Á kjörseðlinum merkja kjósendur X fyrir framan bókstaf listans sem þeir kjósa.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "parties": [
+      "J"
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "flokkarnir-0006",
+    "type": "multiple_choice",
+    "category": "flokkarnir",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvaða listabókstaf hefur Miðflokkurinn?",
+    "options": [
+      {
+        "id": "F",
+        "text": "F"
+      },
+      {
+        "id": "M",
+        "text": "M"
+      },
+      {
+        "id": "S",
+        "text": "S"
+      },
+      {
+        "id": "C",
+        "text": "C"
+      }
+    ],
+    "correctOptionId": "M",
+    "explanation": "Miðflokkurinn hefur fengið úthlutað listabókstafnum M. Á kjörseðlinum merkja kjósendur X fyrir framan bókstaf listans sem þeir kjósa.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "parties": [
+      "M"
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "flokkarnir-0007",
+    "type": "multiple_choice",
+    "category": "flokkarnir",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvaða stjórnmálasamtök hafa listabókstafinn P?",
+    "options": [
+      {
+        "id": "D",
+        "text": "Sjálfstæðisflokkur"
+      },
+      {
+        "id": "J",
+        "text": "Sósíalistaflokkur Íslands"
+      },
+      {
+        "id": "P",
+        "text": "Píratar"
+      },
+      {
+        "id": "V",
+        "text": "Vinstrihreyfingin – grænt framboð"
+      }
+    ],
+    "correctOptionId": "P",
+    "explanation": "Píratar hafa fengið úthlutað listabókstafnum P. Á kjörseðlinum merkja kjósendur X fyrir framan bókstaf listans sem þeir kjósa.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "parties": [
+      "P"
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "flokkarnir-0008",
+    "type": "multiple_choice",
+    "category": "flokkarnir",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvaða listabókstaf hefur Samfylkingin?",
+    "options": [
+      {
+        "id": "B",
+        "text": "B"
+      },
+      {
+        "id": "F",
+        "text": "F"
+      },
+      {
+        "id": "M",
+        "text": "M"
+      },
+      {
+        "id": "S",
+        "text": "S"
+      }
+    ],
+    "correctOptionId": "S",
+    "explanation": "Samfylkingin – jafnaðarmannaflokkur Íslands hefur fengið úthlutað listabókstafnum S. Á kjörseðlinum merkja kjósendur X fyrir framan bókstaf listans sem þeir kjósa.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "parties": [
+      "S"
+    ],
+    "reviewedBy": "pending-human"
+  },
+  {
+    "id": "flokkarnir-0009",
+    "type": "multiple_choice",
+    "category": "flokkarnir",
+    "status": "verified",
+    "difficulty": 1,
+    "prompt": "Hvaða stjórnmálasamtök hafa listabókstafinn V?",
+    "options": [
+      {
+        "id": "V",
+        "text": "Vinstrihreyfingin – grænt framboð"
+      },
+      {
+        "id": "C",
+        "text": "Viðreisn"
+      },
+      {
+        "id": "J",
+        "text": "Sósíalistaflokkur Íslands"
+      },
+      {
+        "id": "P",
+        "text": "Píratar"
+      }
+    ],
+    "correctOptionId": "V",
+    "explanation": "Vinstrihreyfingin – grænt framboð hefur fengið úthlutað listabókstafnum V. Á kjörseðlinum merkja kjósendur X fyrir framan bókstaf listans sem þeir kjósa.",
+    "sources": [
+      {
+        "title": "Alþingiskosningar – Landskjörstjórn",
+        "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
+        "accessed": "2026-10-15"
+      },
+      {
+        "title": "Almennar upplýsingar um alþingiskosningar – Alþingi",
+        "url": "https://www.althingi.is/thingmenn/althingiskosningar/almennar-upplysingar/",
+        "accessed": "2026-10-15"
+      }
+    ],
+    "parties": [
+      "V"
+    ],
+    "reviewedBy": "pending-human"
+  }
+]

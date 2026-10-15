@@ -1,0 +1,69 @@
+[
+  {
+    "id": "atkvaedi-0001",
+    "type": "vote_record",
+    "category": "atkvaedi",
+    "status": "placeholder",
+    "difficulty": 2,
+    "prompt": "Hvernig fór lokaatkvæðagreiðsla Alþingis um [heiti máls] á [númer] löggjafarþingi?",
+    "options": [
+      {
+        "id": "samthykkt",
+        "text": "Málið var samþykkt"
+      },
+      {
+        "id": "fellt",
+        "text": "Málið var fellt"
+      }
+    ],
+    "correctOptionId": "samthykkt",
+    "explanation": "[Úrslitin, t.d. „Samþykkt með [X] atkvæðum gegn [Y]“, með tengli á atkvæðagreiðsluna á althingi.is.]",
+    "sources": []
+  },
+  {
+    "id": "atkvaedi-0002",
+    "type": "vote_record",
+    "category": "atkvaedi",
+    "status": "placeholder",
+    "difficulty": 3,
+    "prompt": "Hvernig greiddi meirihluti þingflokks [Flokks X] atkvæði um [heiti máls]?",
+    "options": [
+      {
+        "id": "ja",
+        "text": "Já"
+      },
+      {
+        "id": "nei",
+        "text": "Nei"
+      },
+      {
+        "id": "hja",
+        "text": "Sat hjá"
+      }
+    ],
+    "correctOptionId": "nei",
+    "explanation": "[Hvernig þingflokkurinn greiddi atkvæði og hvar það kemur fram.]",
+    "sources": [],
+    "parties": [
+      "X1"
+    ]
+  },
+  {
+    "id": "atkvaedi-0003",
+    "type": "estimate",
+    "category": "atkvaedi",
+    "status": "placeholder",
+    "difficulty": 3,
+    "prompt": "Hversu margir þingmenn greiddu atkvæði með [heiti máls]?",
+    "estimate": {
+      "answer": 32,
+      "min": 0,
+      "max": 63,
+      "unit": "atkvæði",
+      "fullTolerance": 0.05,
+      "partialTolerance": 0.15
+    },
+    "explanation": "[Atkvæðatölur og tengill á atkvæðagreiðsluna á althingi.is.]",
+    "sources": []
+  }
+]
