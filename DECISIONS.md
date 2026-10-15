@@ -53,7 +53,7 @@ Choices made where the brief left room. Newest milestone last. Anything marked *
 - **The 2024 election question names the year** ("alþingiskosningarnar 2024") instead of asking about "the last election", so it stays true after the next election and needs no `validUntil`. The source page is an announcement made before the vote.
 - **The 9 list-letter questions used a cyclic design** in which every party was asked about once. They were replaced by 19 questions when the registry grew to 13 parties (see below). All list-letter questions have difficulty 1, so no party is implied to be more obscure than another.
 - **12 placeholders**, 3 each in `stefna`, `atkvaedi`, `folkid` and `tolur`, together covering all five question types. The placeholder `folkid` questions have `validUntil: 2027-12-31` as an example.
-- **Option order in the files is not final.** In several `kerfid` questions the correct answer is option b. M2 will decide whether to shuffle options when the quiz is shown.
+- **Option order in the files is not final.** In several `kerfid` questions the correct answer is option b. (Settled in M2: the app shuffles options; see below.)
 
 ## Party registry (after M1)
 
@@ -72,3 +72,57 @@ Decided by the project owner on 2026-10-15:
   - **Answer mix:** every question includes both seated and non-seated wrong answers, and the correct answer's position rotates. The option sets come from a seeded search with those constraints.
   - **Prompt wording:** party → letter prompts use the party's definite form ("Hvaða listabókstaf hefur Framsóknarflokkurinn?"), and G and P (plural names) are only asked letter → party, so the prompt grammar stays simple.
 - **The content test now also requires every registered party to be asked about at least once**, so no party gets dropped by accident.
+
+## M2: Playable quiz
+
+### Pages and data flow
+
+- **Routes:** `/` (home), `/dagsins` (daily quiz), `/aefing` (category picker) and `/aefing/<category>` (practice round). The slugs are the category keys. Each category gets its own static page via `generateStaticParams`, and any other path is a 404.
+- **The result screen is part of each quiz flow, not a separate route.** The daily result reloads from storage, so `/dagsins` shows it again after a reload.
+- **The question bank is built at build time.** It runs through the same `validateContent` as `npm run validate`, so an invalid question never reaches a page, and placeholders are left out unless `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true`. The validated questions are passed to the pages as data, so Zod is not shipped to browsers (checked in the build output).
+- **`validFrom`/`validUntil` are applied in the browser**, against today's date in Iceland. A static build can be days old, and a question must still disappear on the right day.
+- **Things that depend on the visitor are rendered only in the browser**: today's date and stored progress. The prerendered HTML shows a short "Hleð…" until then. This uses `useSyncExternalStore`, which avoids hydration mismatches and satisfies the React hooks lint rules in this Next.js version.
+- **The Forsíða's streak and "Um Málamót" link are left for M3**, together with streaks and the About page, as the brief's milestones split them.
+
+### Daily quiz
+
+- **Selection:** the playable questions are sorted by id, shuffled with a PRNG seeded from `daily:<date>` (FNV-1a hash and mulberry32), and the first 7 are taken.
+  - **Party rule:** a question is skipped if it concerns a party already picked. If that leaves fewer than 7, skipped questions fill the gaps.
+  - **Fairness:** sorting first means the selection depends only on which questions exist, not on file order, so everyone gets the same quiz from the same build.
+- **Options are shuffled**, seeded by date and question id, so the order is the same for everyone that day and after a reload. `true_false` questions and questions with `keepOptionOrder: true` keep their file order. `keepOptionOrder` is a new optional field, set on questions whose options are numbers, dates, or Já/Nei/Sat hjá.
+- **One attempt per day per device.** The question ids are fixed when the quiz starts, and every answer is saved straight away (`localStorage` key `malamot.daily.v1`, one record per date, the last 400 days kept). A reload continues at the next unanswered question, so a question can't be re-answered by reloading. A record with every question answered counts as finished.
+- **The quiz keeps the date it started on.** If the clock passes midnight mid-quiz, the player finishes yesterday's quiz, and today's starts on the next visit.
+- **If storage is unavailable, the quiz still works** for that visit. It just isn't remembered, so it can be retaken. M3 adds a visible notice.
+- **If content changes during a day**, questions already chosen for today that no longer exist are dropped from the quiz rather than replaced.
+
+### Scoring
+
+- **Choice questions:** 1 point for the correct option, 0 otherwise.
+- **Estimates:** 1 point within `fullTolerance` and ½ point within `partialTolerance`, both relative to the answer and inclusive. A small epsilon handles floating-point edges such as 63 × 1.1.
+- **Totals can be fractional:** they show with an Icelandic decimal comma, e.g. "5,5 af 7". The share card (M3) will mark partial answers separately.
+- **Answers are stored with their outcome and category**, so past results survive later content edits.
+
+### Estimate input
+
+- **Input:** a slider plus a text box for the same number. The slider is keyboard and screen-reader friendly (`aria-valuetext` includes the unit), and the text box accepts Icelandic input such as "1.234,5". The slider starts at the middle of the range.
+- **New optional `estimate.step` field:** without it, the step is 1 for whole-number ranges up to 200 wide, otherwise a power of ten giving about 100–1000 steps. The validator rejects an estimate whose answer is not on the slider grid.
+
+### Wording and feedback
+
+- **Results describe knowledge without gendered adjectives.** The brief's example was "Sterk/ur á…". The app uses "Sterkasta svið: Kerfið" and "Mest að læra: Flokkarnir", where the adjective agrees with *svið*, not with the player. Both lines appear only when the categories differ.
+- **The encouraging line after an answer rotates by question position**, not at random, so a screen shows the same thing every time it is rendered.
+- **Dates and numbers are formatted by hand** (day and month names in `src/i18n/is.ts`). The headless Chromium used for testing has no Icelandic locale data and silently printed "Thursday 15 October", and some real browsers can do the same.
+
+### Practice
+
+- **A round is up to 10 questions** from one category, chosen with the same party rule and a new random seed each time. Practice is not stored.
+- **Categories with no playable questions are shown but can't be chosen** ("Engar spurningar enn"). Right now that is stefna, atkvæði, tölur and fólkið, which have only placeholders.
+
+### Testing and tooling
+
+- **End-to-end tests run against the static build**, served by `scripts/serve-static.ts`. It is a small dependency-free server that maps `/aefing` to `aefing.html` the way static hosts do.
+- **The tests use a phone-sized Chromium (Pixel 7) only**, with the clock fixed to 2026-10-16. With today's content, that day's quiz includes the estimate question, so both input types are tested; the helpers handle either type if the content changes.
+- **Covered:** a full daily quiz, the one-attempt rule, a new quiz the next day, resuming after a reload, and a practice round with replay.
+- **Placeholder preview:** a build with placeholders switched on was played through every placeholder category (all five question types, with the SÝNISHORN badge). This was checked by hand, not in CI.
+- **CI is pinned to `ubuntu-24.04`.** GitHub moves `ubuntu-latest` to Ubuntu 26 on 2026-10-19, and Playwright's system-dependency install needs a release it supports.
+- **Known Next.js 16.4.2 bug on Windows builds only.** Static export writes route prefetch files into nested folders (`aefing/__next.aefing/__PAGE__.txt` instead of `aefing/__next.aefing.__PAGE__.txt`), because it converts only `/` and not `\` in paths. In a Windows build those background prefetches 404 and navigation still works. CI and any Linux-based host produce the correct names, so no workaround was added.

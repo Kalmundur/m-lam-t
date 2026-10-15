@@ -87,6 +87,8 @@ Some facts are only true for a while: who holds an office, who leads a party, ho
 - `min` and `max` are the ends of the slider. Keep the answer away from both ends so the range doesn't give it away.
 - Tolerances are fractions of the answer: `0.1` means ±10%. A guess within `fullTolerance` gets full points, and a guess within `partialTolerance` gets partial points. Defaults: 0.1 and 0.25.
 - Use tight tolerances (or 0) for exact facts like seat counts, and for percentages, where ±10% of 80% is already 72–88%.
+- `step` sets how far the slider moves at a time. Without it, the step is 1 for whole-number ranges up to 200 wide, and a round power of ten for wider ranges (10 for 0–3000). The answer must land exactly on a step, or the validator rejects the question; with an exact-answer question, players couldn't hit it otherwise.
+- The slider starts in the middle of the range.
 
 ## Fields
 
@@ -97,7 +99,8 @@ Some facts are only true for a while: who holds an office, who leads a party, ho
 | `status` | yes | `placeholder` or `verified` (see the review steps below). |
 | `difficulty` | yes | 1 (most people know this), 2, or 3 (specialist). |
 | `prompt` | yes | Icelandic. |
-| `options`, `correctOptionId` | all types except `estimate` | Option ids are short and stable (`a`, `b`, …, or party letters). |
+| `options`, `correctOptionId` | all types except `estimate` | Option ids are short and stable (`a`, `b`, …, or party letters). The app shuffles the options, so their order in the file doesn't matter. |
+| `keepOptionOrder` | optional | Set to `true` when the options have a natural order that shuffling would make confusing: numbers, dates, or "Já / Nei / Sat hjá". `true_false` is never shuffled. |
 | `estimate` | `estimate` only | |
 | `explanation` | yes | One or two sentences, Icelandic, neutral. |
 | `sources` | yes | At least one for verified questions. |
