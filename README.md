@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Málamót
 
-## Getting Started
+A mobile-first quiz that tests how much you know about Icelandic politics: the parties, what they promise, how they vote, who holds which role, and how the electoral system works. Every answer comes with a short explanation and a source.
 
-First, run the development server:
+Málamót is a knowledge quiz, not a vote matcher. It never tells players which party they agree with, never scores or ranks parties, and never asks for anyone's opinions. See [CONTENT_GUIDE.md](CONTENT_GUIDE.md) for the neutrality rules.
+
+## Status
+
+| Milestone | State |
+|---|---|
+| M1 Skeleton: stack, schema, validator, balance report, CI, seed content | done |
+| M2 Playable quiz: daily quiz, practice, all question types | not started |
+| M3 Polish: share card, streaks, About page, accessibility | not started |
+| M4 Alþingi open-data prototype | not started |
+
+## Running it
+
+Requires Node 24 (see `.nvmrc`; 22.12+ also works).
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Development server |
+| `npm run build` | Validates content, then builds the static site into `out/` |
+| `npm run validate` | Checks every question file; exits non-zero on any error |
+| `npm run balance` | Prints how many verified questions concern each party, per category |
+| `npm test` | Unit tests (Vitest), including a check of the real content |
+| `npm run typecheck` | TypeScript |
+| `npm run lint` | ESLint |
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`validate` and `balance` accept `-- --today YYYY-MM-DD` to see what will have expired by a given date.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The build is a plain static site with no server. Any static host can serve `out/`; none is wired up yet.
 
-## Learn More
+### Placeholders
 
-To learn more about Next.js, take a look at the following resources:
+Only `verified` questions are shown to players. To preview placeholder questions locally (marked with a "SÝNISHORN" badge, from M2):
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+NEXT_PUBLIC_SHOW_PLACEHOLDERS=true npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Never set this in production.
 
-## Deploy on Vercel
+## Adding a question
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Open the file for its category in `content/questions/` (`kerfid`, `flokkarnir`, `stefna`, `atkvaedi`, `tolur`, `folkid`).
+2. Give it the next free id in that file, e.g. `stefna-0004`. Never reuse an id; when you delete a question, add its id to `content/retired-ids.json`.
+3. Fill in the fields described in [CONTENT_GUIDE.md](CONTENT_GUIDE.md), with `status: "placeholder"` until a second person has checked it against the source.
+4. Run `npm run validate` and `npm run balance`.
+5. Open a pull request. CI must be green.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Project layout
+
+```
+content/
+  questions/<category>.json   question data, one file per category
+  parties.json                party registry (list letters) used by validation and the balance report
+  retired-ids.json            ids that must never be used again
+scripts/
+  validate.ts                 npm run validate
+  balance-report.ts           npm run balance
+src/
+  app/                        Next.js App Router pages
+  i18n/is.ts                  all Icelandic UI text
+  lib/content/                Zod schema, validation, availability and balance logic (shared by app and scripts)
+.github/workflows/ci.yml      validate (fails), balance (warns), typecheck, lint, test, build
+```
+
+## Continuous integration
+
+On every push to `main` and on pull requests, CI:
+
+- **fails** if any question is invalid,
+- **warns**, without failing, when a party's share of verified questions in `stefna`, `atkvaedi` or `flokkarnir` is above 1.5× or below 0.5× the category average,
+- runs typecheck, lint, unit tests and the static build.
+
+The balance table also appears in the job summary.
+
+## More
+
+- [CONTENT_GUIDE.md](CONTENT_GUIDE.md): how to write, source and review questions
+- [DECISIONS.md](DECISIONS.md): choices made where the brief left room
