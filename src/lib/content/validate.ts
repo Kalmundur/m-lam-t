@@ -81,6 +81,9 @@ export function validateContent(input: ContentInput): ValidationResult {
       if (seen.has(party.letter)) error(input.parties.file, `duplicate party letter "${party.letter}"`);
       seen.add(party.letter);
     }
+    if (!registry.parties.some((p) => p.inBalanceCheck)) {
+      warn(input.parties.file, "no party has inBalanceCheck: true, so the balance report checks nothing");
+    }
   } else {
     for (const issue of registryResult.error.issues) error(input.parties.file, formatIssue(issue));
   }

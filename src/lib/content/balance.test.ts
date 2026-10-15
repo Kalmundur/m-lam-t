@@ -4,10 +4,11 @@ import type { Party, Question } from "./schema";
 import { makeQuestion } from "./test-helpers";
 
 const PARTIES: Party[] = [
-  { letter: "B", name: "Framsóknarflokkur" },
-  { letter: "C", name: "Viðreisn" },
-  { letter: "D", name: "Sjálfstæðisflokkur" },
+  { letter: "B", name: "Framsóknarflokkur", inAlthingi: true, inBalanceCheck: true },
+  { letter: "C", name: "Viðreisn", inAlthingi: true, inBalanceCheck: true },
+  { letter: "D", name: "Sjálfstæðisflokkur", inAlthingi: true, inBalanceCheck: true },
 ];
+const UNCHECKED: Party = { letter: "P", name: "Píratar", inAlthingi: false, inBalanceCheck: false };
 const TODAY = "2026-10-15";
 
 let counter = 0;
@@ -64,6 +65,28 @@ describe("computeBalance", () => {
       tagged("stefna", ["D"]),
     ];
     expect(computeBalance(questions, PARTIES, TODAY).warnings).toEqual([]);
+  });
+
+  it("counts parties outside the balance check but leaves them out of averages and warnings", () => {
+    // Checked: B 2, C 2, D 2 → average 2, no warnings. P (unchecked) has 6 and 0 elsewhere.
+    const questions = [
+      ...["B", "C", "D"].flatMap((letter) => [tagged("flokkarnir", [letter]), tagged("flokkarnir", [letter])]),
+      ...Array.from({ length: 6 }, () => tagged("flokkarnir", ["P"])),
+      tagged("stefna", ["B"]),
+      tagged("stefna", ["C"]),
+      tagged("stefna", ["D"]),
+    ];
+    const report = computeBalance(questions, [...PARTIES, UNCHECKED], TODAY);
+    expect(report.checkedParties).toEqual(["B", "C", "D"]);
+    expect(report.counts.P.flokkarnir).toBe(6);
+    expect(report.averages.flokkarnir).toBe(2);
+    expect(report.warnings).toEqual([]);
+  });
+
+  it("checks nothing when no party is in the balance check", () => {
+    const report = computeBalance([tagged("stefna", ["P"])], [UNCHECKED], TODAY);
+    expect(report.warnings).toEqual([]);
+    expect(report.noData).toEqual(["stefna", "atkvaedi", "flokkarnir"]);
   });
 
   it("only checks stefna, atkvaedi and flokkarnir", () => {

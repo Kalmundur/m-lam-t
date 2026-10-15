@@ -4,17 +4,38 @@
       "title": "Alþingiskosningar – Landskjörstjórn (listabókstafir)",
       "url": "https://island.is/s/landskjorstjorn/althingiskosningar",
       "accessed": "2026-10-15"
+    },
+    {
+      "title": "Um þingflokka – Alþingi (þingflokkar eftir alþingiskosningar 2024)",
+      "url": "https://www.althingi.is/thingmenn/thingflokkar/thingflokkar/",
+      "accessed": "2026-10-15"
     }
   ],
   "parties": [
-    { "letter": "B", "name": "Framsóknarflokkur" },
-    { "letter": "C", "name": "Viðreisn" },
-    { "letter": "D", "name": "Sjálfstæðisflokkur" },
-    { "letter": "F", "name": "Flokkur fólksins" },
-    { "letter": "J", "name": "Sósíalistaflokkur Íslands" },
-    { "letter": "M", "name": "Miðflokkurinn" },
-    { "letter": "P", "name": "Píratar" },
-    { "letter": "S", "name": "Samfylkingin – jafnaðarmannaflokkur Íslands", "shortName": "Samfylkingin" },
-    { "letter": "V", "name": "Vinstrihreyfingin – grænt framboð" }
+    { "letter": "B", "name": "Framsóknarflokkur", "inAlthingi": true, "inBalanceCheck": true },
+    { "letter": "C", "name": "Viðreisn", "inAlthingi": true, "inBalanceCheck": true },
+    { "letter": "D", "name": "Sjálfstæðisflokkur", "inAlthingi": true, "inBalanceCheck": true },
+    { "letter": "F", "name": "Flokkur fólksins", "inAlthingi": true, "inBalanceCheck": true },
+    { "letter": "G", "name": "Græningjar stjórnmálasamtök", "inAlthingi": false, "inBalanceCheck": false },
+    { "letter": "J", "name": "Sósíalistaflokkur Íslands", "inAlthingi": false, "inBalanceCheck": false },
+    {
+      "letter": "L",
+      "name": "Lýðræðisflokkurinn – samtök um sjálfsákvörðunarrétt",
+      "shortName": "Lýðræðisflokkurinn",
+      "inAlthingi": false,
+      "inBalanceCheck": false
+    },
+    { "letter": "M", "name": "Miðflokkurinn", "inAlthingi": true, "inBalanceCheck": true },
+    { "letter": "O", "name": "Frjálslyndi lýðræðisflokkurinn", "inAlthingi": false, "inBalanceCheck": false },
+    { "letter": "P", "name": "Píratar", "inAlthingi": false, "inBalanceCheck": false },
+    {
+      "letter": "S",
+      "name": "Samfylkingin – jafnaðarmannaflokkur Íslands",
+      "shortName": "Samfylkingin",
+      "inAlthingi": true,
+      "inBalanceCheck": true
+    },
+    { "letter": "V", "name": "Vinstrihreyfingin – grænt framboð", "inAlthingi": false, "inBalanceCheck": false },
+    { "letter": "Y", "name": "Ábyrg framtíð", "inAlthingi": false, "inBalanceCheck": false }
   ]
 }

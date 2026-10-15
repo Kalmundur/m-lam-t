@@ -177,8 +177,14 @@ export type Question = z.infer<typeof QuestionSchema>;
 
 export const PartySchema = z.strictObject({
   letter: z.string().regex(/^[A-ZÁÐÉÍÓÚÝÞÆÖ]$/, "letter must be a single capital letter"),
+  /** The name as Landskjörstjórn lists it. */
   name: nonEmpty,
+  /** Shorter display name, e.g. "Samfylkingin" for "Samfylkingin – jafnaðarmannaflokkur Íslands". */
   shortName: nonEmpty.optional(),
+  /** Holds seats in Alþingi. */
+  inAlthingi: z.boolean(),
+  /** Counted by the balance report's averages and warnings. */
+  inBalanceCheck: z.boolean(),
 });
 export type Party = z.infer<typeof PartySchema>;
 

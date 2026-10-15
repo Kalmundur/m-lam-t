@@ -6,9 +6,9 @@ import { validateContent, type ContentInput } from "./validate";
 const REGISTRY = {
   sources: [{ title: "Landskjörstjórn", url: "https://island.is/s/landskjorstjorn/althingiskosningar", accessed: "2026-10-15" }],
   parties: [
-    { letter: "B", name: "Framsóknarflokkur" },
-    { letter: "C", name: "Viðreisn" },
-    { letter: "D", name: "Sjálfstæðisflokkur" },
+    { letter: "B", name: "Framsóknarflokkur", inAlthingi: true, inBalanceCheck: true },
+    { letter: "C", name: "Viðreisn", inAlthingi: true, inBalanceCheck: true },
+    { letter: "D", name: "Sjálfstæðisflokkur", inAlthingi: false, inBalanceCheck: false },
   ],
 };
 
@@ -139,6 +139,30 @@ describe("validateContent", () => {
     );
     expect(result.registry).toBeNull();
     expect(result.errors.length).toBeGreaterThan(0);
+  });
+
+  it("requires both registry flags on every party", () => {
+    const parties = [{ letter: "B", name: "Framsóknarflokkur", inAlthingi: true }];
+    const result = validateContent(
+      input(ALL_CATEGORIES_EMPTY, { parties: { file: "content/parties.json", data: { ...REGISTRY, parties } } }),
+    );
+    expect(result.errors.map((e) => e.message)).toEqual([expect.stringMatching(/^parties\.0\.inBalanceCheck: /)]);
+  });
+
+  it("warns when no party is in the balance check", () => {
+    const parties = REGISTRY.parties.map((p) => ({ ...p, inBalanceCheck: false }));
+    const result = validateContent(
+      input(ALL_CATEGORIES_EMPTY, { parties: { file: "content/parties.json", data: { ...REGISTRY, parties } } }),
+    );
+    expect(result.errors).toEqual([]);
+    expect(result.warnings.map((w) => w.message)).toEqual([
+      "no party has inBalanceCheck: true, so the balance report checks nothing",
+    ]);
+  });
+
+  it("lets questions use parties outside Alþingi and the balance check", () => {
+    const q = makeQuestion({ id: "flokkarnir-0001", category: "flokkarnir", parties: ["D"] });
+    expect(validateContent(input({ ...ALL_CATEGORIES_EMPTY, flokkarnir: [q] })).errors).toEqual([]);
   });
 
   it("lists expired questions as needing review", () => {

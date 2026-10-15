@@ -39,32 +39,35 @@ if (!result.registry) {
 const report = computeBalance(result.questions, result.registry.parties, today);
 const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(1));
 
-const rows = [["party", ...CATEGORIES, "total"]];
+const rows = [["party", ...CATEGORIES, "total", "checked"]];
 for (const p of report.parties) {
   rows.push([
     `${p.letter} ${p.shortName ?? p.name}`,
     ...CATEGORIES.map((c) => String(report.counts[p.letter][c])),
     String(report.totals[p.letter]),
+    p.inBalanceCheck ? "yes" : "no",
   ]);
 }
-rows.push(["average per party", ...CATEGORIES.map((c) => fmt(report.averages[c])), ""]);
+rows.push(["average per checked party", ...CATEGORIES.map((c) => fmt(report.averages[c])), "", ""]);
 rows.push([
   "questions in category",
   ...CATEGORIES.map((c) => String(report.questionsPerCategory[c])),
   String(CATEGORIES.reduce((sum, c) => sum + report.questionsPerCategory[c], 0)),
+  "",
 ]);
 
 console.log(`Málamót party balance (active verified questions, today: ${today})\n`);
 console.log(textTable(rows));
 console.log(
   `\nChecked categories: ${BALANCE_CHECKED_CATEGORIES.join(", ")}. ` +
-    `A party is flagged outside ${BALANCE_LOWER_RATIO}×–${BALANCE_UPPER_RATIO}× the category average.`,
+    `Checked parties (inBalanceCheck): ${report.checkedParties.join(", ") || "none"}. ` +
+    `A checked party is flagged outside ${BALANCE_LOWER_RATIO}×–${BALANCE_UPPER_RATIO}× the category average.`,
 );
 if (result.errors.length) {
   console.log(`Note: ${result.errors.length} validation error(s); invalid questions are not counted. Run \`npm run validate\`.`);
 }
 if (report.noData.length) {
-  console.log(`No party-tagged verified questions yet in: ${report.noData.join(", ")} (not checked).`);
+  console.log(`No verified questions about checked parties yet in: ${report.noData.join(", ")} (not checked).`);
 }
 
 const warningLines = report.warnings.map(

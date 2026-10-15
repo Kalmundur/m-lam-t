@@ -17,16 +17,19 @@ export type BalanceWarning = {
 };
 
 export type BalanceReport = {
+  /** Every registered party; counts are reported for all of them. */
   parties: Party[];
+  /** Letters of the parties with inBalanceCheck: true. Only these are averaged and warned about. */
+  checkedParties: string[];
   /** counts[letter][category]: active verified questions tagged with that party. */
   counts: Record<string, Record<Category, number>>;
   totals: Record<string, number>;
   /** Active verified questions per category, tagged or not. */
   questionsPerCategory: Record<Category, number>;
-  /** Average per-party count in each category (over all registered parties). */
+  /** Average per-party count in each category, over the checked parties. */
   averages: Record<Category, number>;
   warnings: BalanceWarning[];
-  /** Checked categories with no party-tagged verified questions yet. */
+  /** Checked categories where no balance-checked party has a verified question yet. */
   noData: Category[];
 };
 
@@ -37,7 +40,8 @@ function zeroes(): Record<Category, number> {
 /**
  * Counts how many active, verified questions concern each party. A question
  * tagged with several parties counts once for each. Placeholders and expired
- * questions are ignored because players never see them.
+ * questions are ignored because players never see them. Averages and warnings
+ * only consider parties with inBalanceCheck: true.
  */
 export function computeBalance(questions: Question[], parties: Party[], today: string): BalanceReport {
   const counts: Record<string, Record<Category, number>> = Object.fromEntries(
@@ -57,9 +61,10 @@ export function computeBalance(questions: Question[], parties: Party[], today: s
   const totals = Object.fromEntries(
     parties.map((p) => [p.letter, CATEGORIES.reduce((sum, c) => sum + counts[p.letter][c], 0)]),
   );
+  const checked = parties.filter((p) => p.inBalanceCheck);
   const averages = zeroes();
   for (const c of CATEGORIES) {
-    averages[c] = parties.length ? parties.reduce((sum, p) => sum + counts[p.letter][c], 0) / parties.length : 0;
+    averages[c] = checked.length ? checked.reduce((sum, p) => sum + counts[p.letter][c], 0) / checked.length : 0;
   }
 
   const warnings: BalanceWarning[] = [];
@@ -70,7 +75,7 @@ export function computeBalance(questions: Question[], parties: Party[], today: s
       noData.push(category);
       continue;
     }
-    for (const p of parties) {
+    for (const p of checked) {
       const count = counts[p.letter][category];
       const ratio = count / average;
       if (ratio > BALANCE_UPPER_RATIO || ratio < BALANCE_LOWER_RATIO) {
@@ -79,5 +84,14 @@ export function computeBalance(questions: Question[], parties: Party[], today: s
     }
   }
 
-  return { parties, counts, totals, questionsPerCategory, averages, warnings, noData };
+  return {
+    parties,
+    checkedParties: checked.map((p) => p.letter),
+    counts,
+    totals,
+    questionsPerCategory,
+    averages,
+    warnings,
+    noData,
+  };
 }
