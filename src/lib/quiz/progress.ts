@@ -16,7 +16,7 @@ export type DailyRecord = {
 };
 export type DailyHistory = Record<string, DailyRecord>;
 
-const OUTCOMES: readonly Outcome[] = ["correct", "partial", "wrong"];
+const OUTCOMES: readonly Outcome[] = ["correct", "wrong"];
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 function isAnswer(value: unknown): value is ScoredAnswer {

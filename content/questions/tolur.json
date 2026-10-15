@@ -11,8 +11,7 @@
       "min": 50,
       "max": 100,
       "unit": "%",
-      "fullTolerance": 0.03,
-      "partialTolerance": 0.08
+      "fullTolerance": 0.03
     },
     "explanation": "[Kjörsóknin og heimild, t.d. Hagstofa Íslands.]",
     "sources": []

@@ -11,7 +11,6 @@ import { SourceList } from "./SourceList";
 
 const OUTCOME_STYLE: Record<Outcome, { icon: string; className: string }> = {
   correct: { icon: "✓", className: "bg-good-soft text-good" },
-  partial: { icon: "≈", className: "bg-near-soft text-near" },
   wrong: { icon: "✗", className: "bg-bad-soft text-bad" },
 };
 

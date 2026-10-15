@@ -23,9 +23,11 @@ export type QuestionType = (typeof QUESTION_TYPES)[number];
 export const STATUSES = ["verified", "placeholder"] as const;
 export type Status = (typeof STATUSES)[number];
 
-/** Estimate tolerances, as a fraction of the correct answer (0.1 = ±10%). */
+/**
+ * Default estimate tolerance, as a fraction of the correct answer (0.1 = ±10%).
+ * Estimates score full or nothing: there are no partial points.
+ */
 export const DEFAULT_FULL_TOLERANCE = 0.1;
-export const DEFAULT_PARTIAL_TOLERANCE = 0.25;
 
 /** A true_false question must use exactly these option ids, in this order. */
 export const TRUE_FALSE_OPTION_IDS = ["true", "false"] as const;
@@ -43,7 +45,6 @@ export const PENDING_REVIEWER = "pending-human";
 export const CATEGORIES_REQUIRING_VALID_UNTIL: readonly Category[] = ["folkid"];
 
 type EstimateRange = { min: number; max: number; step?: number };
-type EstimateTolerances = { fullTolerance?: number; partialTolerance?: number };
 
 /**
  * Slider step for an estimate question: the explicit `step`, or 1 for integer
@@ -58,11 +59,9 @@ export function estimateStep({ min, max, step }: EstimateRange): number {
   return integerBounds ? Math.max(1, power) : power;
 }
 
-export function estimateTolerances(e: EstimateTolerances): { full: number; partial: number } {
-  return {
-    full: e.fullTolerance ?? DEFAULT_FULL_TOLERANCE,
-    partial: e.partialTolerance ?? DEFAULT_PARTIAL_TOLERANCE,
-  };
+/** How far off a guess may be and still count as correct, as a fraction of the answer. */
+export function estimateTolerance(e: { fullTolerance?: number }): number {
+  return e.fullTolerance ?? DEFAULT_FULL_TOLERANCE;
 }
 
 /** Whether `value` lies on the slider grid min, min + step, …, max (allowing for float error). */

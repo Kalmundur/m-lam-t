@@ -5,6 +5,7 @@ Choices made where the brief left room. Newest milestone last. Anything marked *
 ## Open questions
 
 - **Open: EU referendum result.** `kerfid-0015` asks only for the date (29 August 2026), as the brief says. A question about the result needs a human to pick the source, for example the ministry's announcement after the vote.
+- **Open: Icelandic language review.** The owner will have the UI text (`src/i18n/is.ts`) and the question wording checked before launch.
 - **Open: real contact address.** "Tilkynna villu" (`mailto:`) and the About page use `CONTACT_EMAIL` in `src/config.ts`. It is the placeholder `TODO@malamot.is` until the owner supplies an address. Replace it before launch.
 
 ## M1: Skeleton
@@ -34,7 +35,7 @@ Choices made where the brief left room. Newest milestone last. Anything marked *
 - **`who_promised` must tag the correct party in `parties`.** Otherwise the balance report could not count it.
 - **A party registry (`content/parties.json`)** holds letters and names with their source. The validator checks every `parties` entry against it. (Later extended to all 13 parties with flags; see "Party registry" below.)
 - **Pseudo-parties `X1`–`X3` for placeholders.** Placeholders never attribute a made-up position or vote to a real party. Verified questions can't use them.
-- **Estimate tolerances are fractions of the answer** (0.1 = ±10%). The defaults are 0.1 for full points and 0.25 for partial points, and can be overridden per question. `answer` may not be 0, because relative tolerances would then accept only an exact hit. `fullTolerance` may not exceed `partialTolerance`.
+- **Estimate tolerances are fractions of the answer** (0.1 = ±10%), overridable per question. `answer` may not be 0, because a relative tolerance would then accept only an exact hit. (In M2 the owner dropped partial points, so `partialTolerance` was removed; see "Scoring" under M2.)
 - **Verified `folkid` questions must have `validUntil`.** The brief says facts that can change should have one, and "who holds which role" always can.
 - **`validFrom` and `validUntil` are inclusive** and compared against today's date in Iceland (Atlantic/Reykjavik, UTC+0), not the device's time zone. Everyone sees the same questions on the same day.
 - **Expired questions are warnings, not errors.** They are already hidden from players, and CI shouldn't go red just because a date passed. `npm run validate` lists them as needing review.
@@ -98,8 +99,8 @@ Decided by the project owner on 2026-10-15:
 ### Scoring
 
 - **Choice questions:** 1 point for the correct option, 0 otherwise.
-- **Estimates:** 1 point within `fullTolerance` and ½ point within `partialTolerance`, both relative to the answer and inclusive. A small epsilon handles floating-point edges such as 63 × 1.1.
-- **Totals can be fractional:** they show with an Icelandic decimal comma, e.g. "5,5 af 7". The share card (M3) will mark partial answers separately.
+- **Estimates are full or nothing (owner's decision, 2026-10-15).** A guess within `fullTolerance` of the answer (relative, inclusive, default ±10%) is correct, and anything else is wrong. This departs from the brief's "partial within ±25%". `partialTolerance` was removed from the schema, so the validator rejects it, and the "Nálægt" outcome is gone from the UI. A small epsilon handles floating-point edges such as 63 × 1.1.
+- **Scores are whole numbers** ("5 af 7"), and the share card (M3) needs only right and wrong squares.
 - **Answers are stored with their outcome and category**, so past results survive later content edits.
 
 ### Estimate input

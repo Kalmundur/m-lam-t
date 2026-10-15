@@ -13,8 +13,6 @@
   --brand-soft: #e9effd;
   --good: #166534;
   --good-soft: #e6f4ea;
-  --near: #8a4b0b;
-  --near-soft: #fcf1df;
   --bad: #b42318;
   --bad-soft: #fdecea;
   --sample: #6b21a8;
@@ -33,8 +31,6 @@
     --brand-soft: #1c2640;
     --good: #74e0a0;
     --good-soft: #14281c;
-    --near: #f6c560;
-    --near-soft: #2d2311;
     --bad: #ffa39a;
     --bad-soft: #301816;
     --sample: #d8b4fe;
@@ -53,8 +49,6 @@
   --color-brand-soft: var(--brand-soft);
   --color-good: var(--good);
   --color-good-soft: var(--good-soft);
-  --color-near: var(--near);
-  --color-near-soft: var(--near-soft);
   --color-bad: var(--bad);
   --color-bad-soft: var(--bad-soft);
   --color-sample: var(--sample);

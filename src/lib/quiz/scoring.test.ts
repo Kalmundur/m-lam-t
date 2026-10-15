@@ -65,27 +65,22 @@ describe("scoreAnswer", () => {
   });
 
   describe("estimate", () => {
-    it("gives full points within ±10% and partial within ±25% by default", () => {
+    it("is correct within ±10% by default and wrong otherwise, with no partial points", () => {
       const q = estimate();
       expect(scoreAnswer(q, 100)).toBe("correct");
       expect(scoreAnswer(q, 110)).toBe("correct");
       expect(scoreAnswer(q, 90)).toBe("correct");
-      expect(scoreAnswer(q, 111)).toBe("partial");
-      expect(scoreAnswer(q, 75)).toBe("partial");
-      expect(scoreAnswer(q, 125)).toBe("partial");
-      expect(scoreAnswer(q, 126)).toBe("wrong");
+      expect(scoreAnswer(q, 111)).toBe("wrong");
+      expect(scoreAnswer(q, 89)).toBe("wrong");
       expect(scoreAnswer(q, 0)).toBe("wrong");
     });
 
     it("uses per-question tolerances", () => {
-      // The seat-count question: exact for full points, ±10% for partial.
-      const seats = estimate({ answer: 63, min: 20, max: 120, fullTolerance: 0, partialTolerance: 0.1 });
+      // The seat-count question only accepts the exact number.
+      const seats = estimate({ answer: 63, min: 20, max: 120, fullTolerance: 0 });
       expect(scoreAnswer(seats, 63)).toBe("correct");
-      expect(scoreAnswer(seats, 64)).toBe("partial");
-      expect(scoreAnswer(seats, 69)).toBe("partial");
-      expect(scoreAnswer(seats, 70)).toBe("wrong");
-      expect(scoreAnswer(seats, 57)).toBe("partial");
-      expect(scoreAnswer(seats, 56)).toBe("wrong");
+      expect(scoreAnswer(seats, 64)).toBe("wrong");
+      expect(scoreAnswer(seats, 62)).toBe("wrong");
     });
 
     it("is not thrown off by floating-point error at the boundary", () => {
@@ -97,7 +92,7 @@ describe("scoreAnswer", () => {
     it("handles negative answers", () => {
       const q = estimate({ answer: -50, min: -100, max: 0 });
       expect(scoreAnswer(q, -55)).toBe("correct");
-      expect(scoreAnswer(q, -60)).toBe("partial");
+      expect(scoreAnswer(q, -56)).toBe("wrong");
       expect(scoreAnswer(q, -10)).toBe("wrong");
     });
   });
@@ -111,12 +106,12 @@ describe("summarize", () => {
     outcome,
   });
 
-  it("adds up points, with half a point for partial estimates", () => {
-    const summary = summarize([a("kerfid", "correct"), a("kerfid", "partial"), a("flokkarnir", "wrong")]);
-    expect(summary.points).toBe(1.5);
+  it("adds up one point per correct answer", () => {
+    const summary = summarize([a("kerfid", "correct"), a("kerfid", "wrong"), a("flokkarnir", "wrong")]);
+    expect(summary.points).toBe(1);
     expect(summary.max).toBe(3);
     expect(summary.byCategory).toEqual([
-      { category: "kerfid", points: 1.5, max: 2 },
+      { category: "kerfid", points: 1, max: 2 },
       { category: "flokkarnir", points: 0, max: 1 },
     ]);
   });

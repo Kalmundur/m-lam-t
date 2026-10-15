@@ -1,23 +1,21 @@
-import { CATEGORIES, estimateTolerances, type Category } from "../content/constants";
+import { CATEGORIES, estimateTolerance, type Category } from "../content/constants";
 import type { Question } from "../content/schema";
 
 /** An option id for choice questions, or the guessed number for estimates. */
 export type Response = string | number;
-export type Outcome = "correct" | "partial" | "wrong";
+/** Every question, estimates included, is either right or wrong: no partial points. */
+export type Outcome = "correct" | "wrong";
 
-export const POINTS: Record<Outcome, number> = { correct: 1, partial: 0.5, wrong: 0 };
+export const POINTS: Record<Outcome, number> = { correct: 1, wrong: 0 };
 
-/** Allows for floating-point error at the tolerance boundaries (e.g. 63 × 1.1). */
+/** Allows for floating-point error at the tolerance boundary (e.g. 63 × 1.1). */
 const EPSILON = 1e-9;
 
 export function scoreAnswer(q: Question, response: Response): Outcome {
   if (q.type === "estimate") {
     if (!q.estimate || typeof response !== "number" || !Number.isFinite(response)) return "wrong";
-    const { full, partial } = estimateTolerances(q.estimate);
     const error = Math.abs(response - q.estimate.answer) / Math.abs(q.estimate.answer);
-    if (error <= full + EPSILON) return "correct";
-    if (error <= partial + EPSILON) return "partial";
-    return "wrong";
+    return error <= estimateTolerance(q.estimate) + EPSILON ? "correct" : "wrong";
   }
   return response === q.correctOptionId ? "correct" : "wrong";
 }

@@ -6,7 +6,6 @@ import {
   STATUSES,
   TRUE_FALSE_OPTION_IDS,
   estimateStep,
-  estimateTolerances,
   isOnStepGrid,
   type QuestionType,
 } from "./constants";
@@ -49,8 +48,8 @@ export const EstimateSchema = z
     unit: z.string(),
     /** Slider step; defaults to estimateStep(). */
     step: z.number().positive().optional(),
+    /** A guess within this fraction of the answer is correct (default 0.1); anything else is wrong. */
     fullTolerance: z.number().min(0).max(1).optional(),
-    partialTolerance: z.number().min(0).max(1).optional(),
   })
   .superRefine((e, ctx) => {
     const issue = (path: string, message: string) => ctx.addIssue({ code: "custom", path: [path], message });
@@ -64,10 +63,6 @@ export const EstimateSchema = z
     if (e.step !== undefined && e.step > e.max - e.min) issue("step", "step must not exceed max - min");
     if (!isOnStepGrid(e.answer, e)) {
       issue("answer", `answer is not reachable on the slider (min ${e.min}, step ${estimateStep(e)})`);
-    }
-    const { full, partial } = estimateTolerances(e);
-    if (full > partial) {
-      issue("fullTolerance", `fullTolerance (${full}) must not exceed partialTolerance (${partial})`);
     }
   });
 export type Estimate = z.infer<typeof EstimateSchema>;

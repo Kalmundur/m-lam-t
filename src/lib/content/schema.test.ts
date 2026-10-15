@@ -145,11 +145,14 @@ describe("QuestionSchema", () => {
       expect(messages(estimateQuestion({ answer: 50, min: 100, max: 20, unit: "" }))).toContain(
         "estimate.max: max must be greater than min",
       );
+      expect(messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", fullTolerance: 0.3 }))).toEqual([]);
+      expect(messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", fullTolerance: 1.5 }))).toHaveLength(1);
+    });
+
+    it("rejects partialTolerance, since estimates score full or nothing", () => {
       expect(
-        messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", fullTolerance: 0.3, partialTolerance: 0.2 })),
-      ).toEqual(["estimate.fullTolerance: fullTolerance (0.3) must not exceed partialTolerance (0.2)"]);
-      // Only fullTolerance given: compared against the default partial tolerance (0.25).
-      expect(messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", fullTolerance: 0.3 }))).toHaveLength(1);
+        messages(estimateQuestion({ answer: 63, min: 20, max: 120, unit: "", fullTolerance: 0, partialTolerance: 0.1 })),
+      ).toEqual([expect.stringMatching(/Unrecognized key: "partialTolerance"/)]);
     });
 
     it("rejects an answer of 0, since tolerances are relative", () => {

@@ -62,8 +62,7 @@
       "min": 0,
       "max": 63,
       "unit": "atkvæði",
-      "fullTolerance": 0.05,
-      "partialTolerance": 0.15
+      "fullTolerance": 0.05
     },
     "explanation": "[Atkvæðatölur og tengill á atkvæðagreiðsluna á althingi.is.]",
     "sources": []

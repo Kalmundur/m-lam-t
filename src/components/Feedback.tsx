@@ -8,7 +8,6 @@ import { SourceList } from "./SourceList";
 
 const TONE = {
   correct: { box: "border-good bg-good-soft", text: "text-good" },
-  partial: { box: "border-near bg-near-soft", text: "text-near" },
   wrong: { box: "border-bad bg-bad-soft", text: "text-bad" },
 } as const;
 

@@ -11,8 +11,7 @@
       "min": 20,
       "max": 120,
       "unit": "þingsæti",
-      "fullTolerance": 0,
-      "partialTolerance": 0.1
+      "fullTolerance": 0
     },
     "explanation": "Kosið er um 63 þingsæti í alþingiskosningum: 54 kjördæmissæti og 9 jöfnunarsæti.",
     "sources": [
