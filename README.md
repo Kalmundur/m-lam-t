@@ -66,6 +66,7 @@ scripts/
   balance-report.ts           npm run balance
 src/
   app/                        Next.js App Router pages
+  config.ts                   project settings, e.g. CONTACT_EMAIL (placeholder TODO@malamot.is)
   i18n/is.ts                  all Icelandic UI text
   lib/content/                Zod schema, validation, availability and balance logic (shared by app and scripts)
 .github/workflows/ci.yml      validate (fails), balance (warns), typecheck, lint, test, build
