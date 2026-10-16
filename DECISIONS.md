@@ -83,7 +83,7 @@ Decided by the project owner on 2026-10-15:
 - **The question bank is built at build time.** It runs through the same `validateContent` as `npm run validate`, so an invalid question never reaches a page, and placeholders are left out unless `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true`. The validated questions are passed to the pages as data, so Zod is not shipped to browsers (checked in the build output).
 - **`validFrom`/`validUntil` are applied in the browser**, against today's date in Iceland. A static build can be days old, and a question must still disappear on the right day.
 - **Things that depend on the visitor are rendered only in the browser**: today's date and stored progress. The prerendered HTML shows a short "Hleð…" until then. This uses `useSyncExternalStore`, which avoids hydration mismatches and satisfies the React hooks lint rules in this Next.js version.
-- **The Forsíða's streak and "Um Málamót" link are left for M3**, together with streaks and the About page, as the brief's milestones split them.
+- **The Forsíða's streak and "Um Málamót" link were left for M3**, together with streaks and the About page, as the brief's milestones split them. (Done in M3.)
 
 ### Daily quiz
 
@@ -93,7 +93,7 @@ Decided by the project owner on 2026-10-15:
 - **Options are shuffled**, seeded by date and question id, so the order is the same for everyone that day and after a reload. `true_false` questions and questions with `keepOptionOrder: true` keep their file order. `keepOptionOrder` is a new optional field, set on questions whose options are numbers, dates, or Já/Nei/Sat hjá.
 - **One attempt per day per device.** The question ids are fixed when the quiz starts, and every answer is saved straight away (`localStorage` key `malamot.daily.v1`, one record per date, the last 400 days kept). A reload continues at the next unanswered question, so a question can't be re-answered by reloading. A record with every question answered counts as finished.
 - **The quiz keeps the date it started on.** If the clock passes midnight mid-quiz, the player finishes yesterday's quiz, and today's starts on the next visit.
-- **If storage is unavailable, the quiz still works** for that visit. It just isn't remembered, so it can be retaken. M3 adds a visible notice.
+- **If storage is unavailable, the quiz still works** for that visit. It just isn't remembered, so it can be retaken. (M3 added a visible notice.)
 - **If content changes during a day**, questions already chosen for today that no longer exist are dropped from the quiz rather than replaced.
 
 ### Scoring
@@ -127,3 +127,40 @@ Decided by the project owner on 2026-10-15:
 - **Placeholder preview:** a build with placeholders switched on was played through every placeholder category (all five question types, with the SÝNISHORN badge). This was checked by hand, not in CI.
 - **CI is pinned to `ubuntu-24.04`.** GitHub moves `ubuntu-latest` to Ubuntu 26 on 2026-10-19, and Playwright's system-dependency install needs a release it supports.
 - **Known Next.js 16.4.2 bug on Windows builds only.** Static export writes route prefetch files into nested folders (`aefing/__next.aefing/__PAGE__.txt` instead of `aefing/__next.aefing.__PAGE__.txt`), because it converts only `/` and not `\` in paths. In a Windows build those background prefetches 404 and navigation still works. CI and any Linux-based host produce the correct names, so no workaround was added.
+
+## M3: Polish
+
+### Share card and streak
+
+- **Share text:** `Málamót 15.10. 5/7 🟩🟩🟥🟩🟩🟥🟩`, as in the brief, followed on a second line by the site's address (`window.location.origin`), so whoever receives it can find the quiz. The squares follow the order the questions were asked. The text is built from the stored record alone, so it stays the same even if a question is later removed.
+- **Buttons:** "Deila" appears only where the browser has the Web Share API; it falls back to copying if sharing fails for any reason other than the player cancelling. "Afrita" is always there. If the clipboard is blocked too, the player is asked to copy the text, which is shown on screen, by hand.
+- **The share card is only on the daily quiz result**, not after practice, since only the daily quiz is the same for everyone.
+- **Streak:** the number of days in a row with a completed daily quiz. If today's quiz isn't done yet, it counts from yesterday, so a streak isn't lost before the day is over. A quiz with every question answered counts even if the results screen was never opened.
+- **Where the streak shows:** on the home page and on the share card, but not in the shared text, which keeps the brief's format. Without storage there is no history, so no streak is shown.
+
+### Storage
+
+- **Detection:** whether `localStorage` works is tested once per page load with a probe key, and the result is cached. Probing on every render would fire `storage` events in other open tabs.
+- **When storage is blocked** (e.g. private mode), the home page and the daily quiz say that results and streaks won't be saved. The quiz is still fully playable, and a reload starts it over.
+- **When a save fails although storage works** (e.g. the storage is full), the daily quiz shows a different notice and carries on.
+
+### Pages and states
+
+- **About (`/um`)** covers the brief's §1 principles in plain Icelandic, where questions come from and how they're checked, how to report an error (with `CONTACT_EMAIL`), and privacy. A footer link reaches it from every page.
+- **Errors and 404s:** an Icelandic 404 page (`not-found.tsx`, exported as `404.html`) and an error page (`error.tsx`) with "Reyna aftur", using the `retry` prop this Next.js version provides, and a link home.
+- **Empty states:** M2 already had them (no questions today, an empty practice category), so they're unchanged.
+- **Dark mode follows the system setting** (`prefers-color-scheme`), with no in-app toggle. The colour tokens from M2 were checked in both modes by axe, with no contrast violations.
+- **Text wraps anywhere when it has to** (`overflow-wrap: anywhere` on the body), so long party names such as "Lýðræðisflokkurinn – samtök um sjálfsákvörðunarrétt" don't overflow. At 320px wide, no page scrolls sideways.
+- **The new M3 strings in `src/i18n/is.ts` are marked as not yet language-reviewed.**
+
+### Accessibility checks
+
+- **`npm run lighthouse`** runs Lighthouse 13's accessibility category, with its default mobile emulation, on `/`, `/dagsins`, `/aefing`, `/aefing/kerfid` and `/um`, and fails if any page scores below 95. All five scored 100. CI runs it with the runner's Chrome.
+- **Lighthouse only sees a first visit** (it clears storage), so the end-to-end tests also run axe-core (WCAG 2.2 A/AA rules) in light and dark mode. Covered: the home page before and after playing, an unanswered and an answered question of each input type, the daily and practice results (with a review item expanded), the practice picker, About and the 404 page. Any violation fails the test; there are none.
+- **Lighthouse is imported dynamically.** When tsx converts it to CommonJS, it injects a `__name` helper into functions that Lighthouse later runs inside the page, where the helper doesn't exist.
+
+### Tests
+
+- **The no-storage end-to-end test makes `localStorage` throw on access**, as Safari does in private mode. It plays the whole daily quiz and a practice question, and checks that the notice appears, the results and share card work, no streak is shown, and a reload starts over.
+- **Sharing is tested both ways:** with a stubbed `navigator.share`, which must receive exactly the text shown, and with sharing absent, where the clipboard must contain the same text. The Windows clipboard turns `\n` into `\r\n`, so the test normalises line endings.
+- **The static server now uses `stream.pipeline`.** With `pipe`, an aborted request (e.g. a cancelled prefetch) leaves the file open. A preview server left running for hours stopped answering and made the end-to-end tests time out; leaked file handles are the likely cause, though that wasn't proven.

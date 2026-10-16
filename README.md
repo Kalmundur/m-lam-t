@@ -10,7 +10,7 @@ Málamót is a knowledge quiz, not a vote matcher. It never tells players which 
 |---|---|
 | M1 Skeleton: stack, schema, validator, balance report, CI, seed content | done |
 | M2 Playable quiz: daily quiz, practice, all question types | done |
-| M3 Polish: share card, streaks, About page, accessibility | not started |
+| M3 Polish: share card, streaks, About page, accessibility | done |
 | M4 Alþingi open-data prototype | not started |
 
 ## Running it
@@ -30,7 +30,8 @@ npm run dev          # http://localhost:3000
 | `npm run balance` | Prints how many verified questions concern each party, per category, and warns about uneven coverage of the balance-checked parties |
 | `npm run serve` | Serves the built `out/` folder at http://localhost:3000, like a static host would |
 | `npm test` | Unit tests (Vitest), including a check of the real content |
-| `npm run test:e2e` | Playwright end-to-end tests against the built site (run `npm run build` first) |
+| `npm run test:e2e` | Playwright end-to-end tests against the built site, including axe accessibility checks (run `npm run build` first) |
+| `npm run lighthouse` | Lighthouse accessibility audit (mobile) of every page; fails below 95 (run `npm run build` first) |
 | `npm run typecheck` | TypeScript |
 | `npm run lint` | ESLint |
 
@@ -49,7 +50,11 @@ The first time you run the end-to-end tests, install the browser with `npx playw
 | `/aefing` | Æfing: pick a category |
 | `/aefing/<category>` | Practice round of up to 10 random questions |
 
-Progress is kept in the browser's `localStorage` only. There are no accounts and nothing is sent anywhere.
+| `/um` | Um Málamót: the neutrality rules, where questions come from, how to report an error, privacy |
+
+After the daily quiz, the result screen has a spoiler-free share card (`Málamót 15.10. 5/7 🟩🟩🟥🟩🟩🟥🟩`) with Deila (Web Share API, where available) and Afrita buttons. The home page shows the current streak of days in a row.
+
+Progress is kept in the browser's `localStorage` only. There are no accounts and nothing is sent anywhere. If storage is blocked, the app still works and says that nothing will be saved.
 
 ### Placeholders
 
@@ -76,18 +81,19 @@ content/
   questions/<category>.json   question data, one file per category
   parties.json                all 13 parties with list letters, flagged inAlthingi / inBalanceCheck
   retired-ids.json            ids that must never be used again
-e2e/                          Playwright tests: daily quiz, resume, practice
+e2e/                          Playwright tests: quiz flows, sharing, streaks, no-storage mode, axe checks
 scripts/
   validate.ts                 npm run validate
   balance-report.ts           npm run balance
   serve-static.ts             npm run serve
+  lighthouse.ts               npm run lighthouse
 src/
   app/                        Next.js App Router pages
   components/                 quiz screens (question card, results, daily and practice flows)
   config.ts                   project settings: CONTACT_EMAIL (placeholder TODO@malamot.is), SHOW_PLACEHOLDERS
   i18n/is.ts                  all Icelandic UI text
   lib/content/                Zod schema, validation, availability and balance logic (shared by app and scripts)
-  lib/quiz/                   question selection, scoring, stored daily progress
+  lib/quiz/                   question selection, scoring, stored daily progress, streaks, share text
 .github/workflows/ci.yml      validate (fails), balance (warns), typecheck, lint, test, build, end-to-end
 ```
 
@@ -97,7 +103,7 @@ On every push to `main` and on pull requests, CI:
 
 - **fails** if any question is invalid,
 - **warns**, without failing, when a balance-checked party's share of verified questions in `stefna`, `atkvaedi` or `flokkarnir` is above 1.5× or below 0.5× the category average (only parties with `inBalanceCheck: true` in `content/parties.json` are compared),
-- runs typecheck, lint, unit tests, the static build, and the end-to-end tests against that build.
+- runs typecheck, lint, unit tests, the static build, the end-to-end tests against that build, and the Lighthouse accessibility audit (fails below 95).
 
 The balance table also appears in the job summary.
 
