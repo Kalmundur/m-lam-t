@@ -9,33 +9,26 @@
       "title": "Um þingflokka – Alþingi (þingflokkar eftir alþingiskosningar 2024)",
       "url": "https://www.althingi.is/thingmenn/thingflokkar/thingflokkar/",
       "accessed": "2026-10-15"
+    },
+    {
+      "title": "Þingflokkar – opin gögn Alþingis (XML)",
+      "url": "https://www.althingi.is/altext/xml/thingflokkar/",
+      "accessed": "2026-10-16"
     }
   ],
   "parties": [
-    { "letter": "B", "name": "Framsóknarflokkur", "inAlthingi": true, "inBalanceCheck": true },
-    { "letter": "C", "name": "Viðreisn", "inAlthingi": true, "inBalanceCheck": true },
-    { "letter": "D", "name": "Sjálfstæðisflokkur", "inAlthingi": true, "inBalanceCheck": true },
-    { "letter": "F", "name": "Flokkur fólksins", "inAlthingi": true, "inBalanceCheck": true },
+    { "letter": "B", "name": "Framsóknarflokkur", "inAlthingi": true, "inBalanceCheck": true, "althingiGroupIds": [2] },
+    { "letter": "C", "name": "Viðreisn", "inAlthingi": true, "inBalanceCheck": true, "althingiGroupIds": [45] },
+    { "letter": "D", "name": "Sjálfstæðisflokkur", "inAlthingi": true, "inBalanceCheck": true, "althingiGroupIds": [35] },
+    { "letter": "F", "name": "Flokkur fólksins", "inAlthingi": true, "inBalanceCheck": true, "althingiGroupIds": [46] },
     { "letter": "G", "name": "Græningjar stjórnmálasamtök", "inAlthingi": false, "inBalanceCheck": false },
     { "letter": "J", "name": "Sósíalistaflokkur Íslands", "inAlthingi": false, "inBalanceCheck": false },
-    {
-      "letter": "L",
-      "name": "Lýðræðisflokkurinn – samtök um sjálfsákvörðunarrétt",
-      "shortName": "Lýðræðisflokkurinn",
-      "inAlthingi": false,
-      "inBalanceCheck": false
-    },
-    { "letter": "M", "name": "Miðflokkurinn", "inAlthingi": true, "inBalanceCheck": true },
+    { "letter": "L", "name": "Lýðræðisflokkurinn – samtök um sjálfsákvörðunarrétt", "shortName": "Lýðræðisflokkurinn", "inAlthingi": false, "inBalanceCheck": false },
+    { "letter": "M", "name": "Miðflokkurinn", "inAlthingi": true, "inBalanceCheck": true, "althingiGroupIds": [47] },
     { "letter": "O", "name": "Frjálslyndi lýðræðisflokkurinn", "inAlthingi": false, "inBalanceCheck": false },
-    { "letter": "P", "name": "Píratar", "inAlthingi": false, "inBalanceCheck": false },
-    {
-      "letter": "S",
-      "name": "Samfylkingin – jafnaðarmannaflokkur Íslands",
-      "shortName": "Samfylkingin",
-      "inAlthingi": true,
-      "inBalanceCheck": true
-    },
-    { "letter": "V", "name": "Vinstrihreyfingin – grænt framboð", "inAlthingi": false, "inBalanceCheck": false },
+    { "letter": "P", "name": "Píratar", "inAlthingi": false, "inBalanceCheck": false, "althingiGroupIds": [43] },
+    { "letter": "S", "name": "Samfylkingin – jafnaðarmannaflokkur Íslands", "shortName": "Samfylkingin", "inAlthingi": true, "inBalanceCheck": true, "althingiGroupIds": [38] },
+    { "letter": "V", "name": "Vinstrihreyfingin – grænt framboð", "inAlthingi": false, "inBalanceCheck": false, "althingiGroupIds": [23] },
     { "letter": "Y", "name": "Ábyrg framtíð", "inAlthingi": false, "inBalanceCheck": false }
   ]
 }

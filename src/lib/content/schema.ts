@@ -155,6 +155,12 @@ export const PartySchema = z.strictObject({
   inAlthingi: z.boolean(),
   /** Counted by the balance report's averages and warnings. */
   inBalanceCheck: z.boolean(),
+  /**
+   * Parliamentary group ids in Alþingi's open data (altext/xml/thingflokkar). Alþingi's
+   * own group abbreviations differ from list letters (it calls Sjálfstæðisflokkur "S"),
+   * so groups are matched to parties by these ids only.
+   */
+  althingiGroupIds: z.array(z.number().int().positive()).optional(),
 });
 export type Party = z.infer<typeof PartySchema>;
 

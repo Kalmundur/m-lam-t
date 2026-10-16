@@ -149,6 +149,18 @@ describe("validateContent", () => {
     expect(result.errors.map((e) => e.message)).toEqual([expect.stringMatching(/^parties\.0\.inBalanceCheck: /)]);
   });
 
+  it("rejects an Alþingi group id listed for two parties", () => {
+    const parties = [
+      { ...REGISTRY.parties[0], althingiGroupIds: [2] },
+      { ...REGISTRY.parties[1], althingiGroupIds: [2, 45] },
+      REGISTRY.parties[2],
+    ];
+    const result = validateContent(
+      input(ALL_CATEGORIES_EMPTY, { parties: { file: "content/parties.json", data: { ...REGISTRY, parties } } }),
+    );
+    expect(result.errors.map((e) => e.message)).toEqual(["Alþingi group 2 is listed for both B and C"]);
+  });
+
   it("warns when no party is in the balance check", () => {
     const parties = REGISTRY.parties.map((p) => ({ ...p, inBalanceCheck: false }));
     const result = validateContent(
