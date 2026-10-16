@@ -11,7 +11,7 @@ Málamót is a knowledge quiz, not a vote matcher. It never tells players which 
 | M1 Skeleton: stack, schema, validator, balance report, CI, seed content | done |
 | M2 Playable quiz: daily quiz, practice, all question types | done |
 | M3 Polish: share card, streaks, About page, accessibility | done |
-| M4 Alþingi open-data prototype | not started |
+| M4 Alþingi open-data prototype | done |
 
 ## Running it
 
@@ -31,6 +31,7 @@ npm run dev          # http://localhost:3000
 | `npm run serve` | Serves the built `out/` folder at http://localhost:3000, like a static host would |
 | `npm test` | Unit tests (Vitest), including a check of the real content |
 | `npm run test:e2e` | Playwright end-to-end tests against the built site, including axe accessibility checks (run `npm run build` first) |
+| `npm run fetch-votes` | Downloads a session's votes from Alþingi's open data into `content/raw/` (see [docs/althingi-data.md](docs/althingi-data.md)) |
 | `npm run lighthouse` | Lighthouse accessibility audit (mobile) of every page; fails below 95 (run `npm run build` first) |
 | `npm run typecheck` | TypeScript |
 | `npm run lint` | ESLint |
@@ -79,14 +80,17 @@ Never set this in production.
 ```
 content/
   questions/<category>.json   question data, one file per category
+  raw/                        downloads from npm run fetch-votes (not committed)
   parties.json                all 13 parties with list letters, flagged inAlthingi / inBalanceCheck
   retired-ids.json            ids that must never be used again
+docs/althingi-data.md         Alþingi's open XML data: endpoints, formats, pitfalls
 e2e/                          Playwright tests: quiz flows, sharing, streaks, no-storage mode, axe checks
 scripts/
   validate.ts                 npm run validate
   balance-report.ts           npm run balance
   serve-static.ts             npm run serve
   lighthouse.ts               npm run lighthouse
+  fetch-votes.ts              npm run fetch-votes (parsing in lib/althingi.ts, test fixtures in fixtures/althingi/)
 src/
   app/                        Next.js App Router pages
   components/                 quiz screens (question card, results, daily and practice flows)
