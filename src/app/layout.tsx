@@ -54,6 +54,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </noscript>
           {children}
         </main>
+        <footer className="border-t border-line">
+          <nav className="mx-auto flex max-w-md px-4 py-4 text-sm" aria-label={is.app.name}>
+            <Link href="/um" className="link">
+              {is.nav.about}
+            </Link>
+          </nav>
+        </footer>
       </body>
     </html>
   );

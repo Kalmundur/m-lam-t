@@ -19,6 +19,8 @@ type Props = {
   subtitle?: string;
   questions: Question[];
   answers: ScoredAnswer[];
+  /** Shown right under the score, e.g. the share card. */
+  extra?: ReactNode;
   /** Buttons and links under the score. */
   actions: ReactNode;
   /** Move focus to the result heading (when arriving from the last question). */
@@ -26,7 +28,7 @@ type Props = {
 };
 
 /** Score, a breakdown by category, and a review of every answer with explanations and sources. */
-export function ResultView({ title, subtitle, questions, answers, actions, focusOnMount = false }: Props) {
+export function ResultView({ title, subtitle, questions, answers, extra, actions, focusOnMount = false }: Props) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const summary = summarize(answers);
   const ratio = summary.max ? summary.points / summary.max : 0;
@@ -56,6 +58,8 @@ export function ResultView({ title, subtitle, questions, answers, actions, focus
           </p>
         )}
       </section>
+
+      {extra}
 
       {summary.byCategory.length > 1 && (
         <section className="card flex flex-col gap-3">

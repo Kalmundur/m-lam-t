@@ -65,6 +65,8 @@ body {
   background: var(--page);
   color: var(--ink);
   font-family: var(--font-sans), system-ui, sans-serif;
+  /* Long Icelandic compounds and party names must not overflow a 320px screen. */
+  overflow-wrap: anywhere;
 }
 
 :focus-visible {

@@ -124,7 +124,7 @@ Placeholders show the format and mark the gaps a human needs to fill. They:
 3. **Sign off**: the reviewer sets `status: "verified"` and `reviewedBy` to their name.
 4. **Run** `npm run validate` and `npm run balance`, then open a pull request. CI must be green. Balance warnings don't block a merge, but they do need a plan, such as questions for the under-represented parties.
 
-The seed questions were written by the coding agent from official pages and have `reviewedBy: "pending-human"`. A person still needs to check each one and replace that value with their name. `npm run validate` lists how many are still pending.
+The seed questions were written by the coding agent from official pages, then signed off by the project owner. For questions the agent writes later, the same applies: they start with `reviewedBy: "pending-human"`, and a person checks each one and replaces that value with their name. `npm run validate` lists how many are still pending.
 
 ### Neutrality checklist for reviewers
 

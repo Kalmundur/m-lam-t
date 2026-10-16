@@ -3,22 +3,23 @@
 import Link from "next/link";
 import { useMemo } from "react";
 import { formatLongDate, formatNumber } from "@/lib/format";
-import { useIcelandToday, useStoredValue } from "@/lib/hooks";
-import { DAILY_STORAGE_KEY, parseDailyHistory } from "@/lib/quiz/progress";
+import { useIcelandToday, useStorageAvailable, useStoredValue } from "@/lib/hooks";
+import { DAILY_STORAGE_KEY, isRecordComplete, parseDailyHistory } from "@/lib/quiz/progress";
 import { summarize } from "@/lib/quiz/scoring";
+import { currentStreak } from "@/lib/quiz/streak";
 import { is } from "@/i18n/is";
+import { StorageNotice } from "./StatusMessage";
 
-/** The daily quiz on the home page: start it, continue it, or see today's result. */
+/** The daily quiz on the home page: start it, continue it, or see today's result; plus the streak. */
 export function DailyCard() {
   const today = useIcelandToday();
   const raw = useStoredValue(DAILY_STORAGE_KEY);
-  const record = useMemo(
-    () => (today && raw !== undefined ? parseDailyHistory(raw)[today] : undefined),
-    [today, raw],
-  );
+  const storageAvailable = useStorageAvailable();
+  const history = useMemo(() => (raw === undefined ? {} : parseDailyHistory(raw)), [raw]);
+  const record = today ? history[today] : undefined;
+  const streak = today ? currentStreak(history, today) : 0;
   const total = record?.questionIds.length ?? 0;
   const answered = record?.answers.length ?? 0;
-  const finished = record !== undefined && (record.finished || (total > 0 && answered >= total));
 
   return (
     <section className="card flex flex-col gap-3" aria-labelledby="daily-title">
@@ -29,7 +30,13 @@ export function DailyCard() {
         {/* The date depends on the visitor's clock, so it only appears once the page runs in the browser. */}
         <p className="min-h-6 text-ink-muted">{today ? formatLongDate(today) : ""}</p>
       </div>
-      {finished ? (
+      {streak > 0 && (
+        <p className="font-medium" data-testid="streak">
+          <span aria-hidden="true">🔥 </span>
+          {is.streak(streak)}
+        </p>
+      )}
+      {isRecordComplete(record) ? (
         <>
           <p>{is.home.dailyDone(formatNumber(summarize(record.answers).points), total)}</p>
           <Link href="/dagsins" className="button-secondary">
@@ -44,6 +51,7 @@ export function DailyCard() {
           </Link>
         </>
       )}
+      {!storageAvailable && <StorageNotice text={is.storage.unavailable} />}
     </section>
   );
 }

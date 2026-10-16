@@ -1,30 +1,5 @@
-import { expect, test, type Page } from "@playwright/test";
-
-// The clock is fixed so runs are repeatable. With the current content the quiz for
-// 2026-10-16 includes an estimate question, so both answer inputs get exercised;
-// the helpers below handle whichever kind of question appears.
-const QUIZ_DAY = new Date("2026-10-16T12:00:00Z");
-const NEXT_DAY = new Date("2026-10-17T12:00:00Z");
-
-/** Answers the question on screen: moves the slider one step, or picks the first option. */
-async function answer(page: Page): Promise<"estimate" | "choice"> {
-  const slider = page.getByRole("slider");
-  const kind = (await slider.count()) > 0 ? "estimate" : "choice";
-  if (kind === "estimate") {
-    await slider.focus();
-    await page.keyboard.press("ArrowRight");
-  } else {
-    await page.getByRole("radio").first().check();
-  }
-  await page.getByRole("button", { name: "Svara" }).click();
-  return kind;
-}
-
-function collectPageErrors(page: Page): string[] {
-  const errors: string[] = [];
-  page.on("pageerror", (error) => errors.push(error.message));
-  return errors;
-}
+import { expect, test } from "@playwright/test";
+import { NEXT_DAY, QUIZ_DAY, answer, collectPageErrors } from "./helpers";
 
 test("plays a full daily quiz, then shows the result instead of a second attempt", async ({ page }) => {
   const errors = collectPageErrors(page);

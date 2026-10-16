@@ -53,6 +53,11 @@ jobs:
       - name: Install Playwright browser
         run: npx playwright install --with-deps chromium
 
-      # Plays the daily quiz and a practice round against the static build in out/.
+      # Plays the quiz against the static build in out/, including axe accessibility
+      # checks in light and dark mode and a run with localStorage disabled.
       - name: End-to-end tests
         run: npm run test:e2e
+
+      # Fails if any page scores below 95. Uses the runner's preinstalled Chrome.
+      - name: Lighthouse accessibility (mobile)
+        run: npm run lighthouse
