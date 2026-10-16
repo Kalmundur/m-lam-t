@@ -44,3 +44,6 @@ next-env.d.ts
 /test-results/
 /playwright-report/
 /blob-report/
+
+# raw downloads from Alþingi (npm run fetch-votes); see content/raw/README.md
+/content/raw/*.json

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<atkvæðagreiðslur>
+<!-- greiðirekkiatkvæði er oft kallað að sitja hjá - þingmaðurinn var í þingsalnum og ýtti á takkann greiðir ekki atkvæði -->
+<!-- boðaði fjarvist, þingmaðurinn tilkynnti t.d. veikindi eða var í erindigjörðum á vegum Alþingis -->
+<!-- fjarverandi, þingmaðurinn ýtti ekki á takka og hafði ekki boðað fjarvist -->
+<atkvæðagreiðsla  málsnúmer='1' þingnúmer='157'			málsflokkur='A' atkvæðagreiðslunúmer='68142'>
+<mál málsnúmer='1' þingnúmer='157' málsflokkur='A'>
+<málsheiti>fjárlög 2026</málsheiti><html>https://www.althingi.is/thingstorf/thingmalalistar-eftir-thingum/ferill/?ltg=157&amp;mnr=1</html>
+<xml>https://www.althingi.is/altext/xml/thingmalalisti/thingmal/?lthing=157&amp;malnr=1</xml>
+</mál><tími>2025-09-12T15:48:03</tími>
+<fundur>4</fundur>
+<tegund tegund='v2'>Frv. gengur til 2. umr.</tegund><þingskjal skjalsnúmer='1' þingnúmer='157'>
+<slóð>
+<xml>https://www.althingi.is/altext/xml/thingskjol/thingskjal/?lthing=157&amp;skjalnr=1</xml>
+</slóð>
+</þingskjal>
+
+<samantekt>
+<aðferð>yfirlýsing forseta/mál gengur</aðferð>
+</samantekt>
+</atkvæðagreiðsla>
+<atkvæðagreiðsla  málsnúmer='114' þingnúmer='157'			málsflokkur='A' atkvæðagreiðslunúmer='69251'>
+<mál málsnúmer='114' þingnúmer='157' málsflokkur='A'>
+<málsheiti>veitingastaðir, gististaðir og skemmtanahald</málsheiti><html>https://www.althingi.is/thingstorf/thingmalalistar-eftir-thingum/ferill/?ltg=157&amp;mnr=114</html>
+<xml>https://www.althingi.is/altext/xml/thingmalalisti/thingmal/?lthing=157&amp;malnr=114</xml>
+</mál><tími>2026-03-19T11:31:54</tími>
+<fundur>86</fundur>
+<tegund tegund='lg'>Frv.</tegund><þingskjal skjalsnúmer='692' þingnúmer='157'>
+<slóð>
+<xml>https://www.althingi.is/altext/xml/thingskjol/thingskjal/?lthing=157&amp;skjalnr=692</xml>
+</slóð>
+</þingskjal>
+
+<samantekt><aðferð>atkvæðagreiðslukerfi</aðferð>
+<já><fjöldi>31</fjöldi></já>
+<nei><fjöldi>23</fjöldi></nei>
+<greiðirekkiatkvæði><fjöldi>0</fjöldi></greiðirekkiatkvæði>
+<afgreiðsla>samþykkt</afgreiðsla>
+</samantekt>
+<nánar>
+<html>https://www.althingi.is/dba-bin/atkvgr.pl?nnafnak=69251</html>
+<xml>https://www.althingi.is/altext/xml/atkvaedagreidslur/atkvaedagreidsla/?numer=69251</xml>
+</nánar>
+</atkvæðagreiðsla>
+<atkvæðagreiðsla  málsnúmer='49' þingnúmer='157'			málsflokkur='A' atkvæðagreiðslunúmer='68284'>
+<mál málsnúmer='49' þingnúmer='157' málsflokkur='A'>
+<málsheiti>fjölmiðlar</málsheiti><html>https://www.althingi.is/thingstorf/thingmalalistar-eftir-thingum/ferill/?ltg=157&amp;mnr=49</html>
+<xml>https://www.althingi.is/altext/xml/thingmalalisti/thingmal/?lthing=157&amp;malnr=49</xml>
+</mál><tími>2025-10-16T11:31:14</tími>
+<fundur>19</fundur>
+<tegund tegund='bt'>Brtt.</tegund><þingskjal skjalsnúmer='200' þingnúmer='157'>
+<slóð>
+<xml>https://www.althingi.is/altext/xml/thingskjol/thingskjal/?lthing=157&amp;skjalnr=200</xml>
+</slóð>
+</þingskjal>
+
+<samantekt><aðferð>atkvæðagreiðslukerfi</aðferð>
+<já><fjöldi>16</fjöldi></já>
+<nei><fjöldi>27</fjöldi></nei>
+<greiðirekkiatkvæði><fjöldi>4</fjöldi></greiðirekkiatkvæði>
+<afgreiðsla>Fellt</afgreiðsla>
+</samantekt>
+<nánar>
+<html>https://www.althingi.is/dba-bin/atkvgr.pl?nnafnak=68284</html>
+<xml>https://www.althingi.is/altext/xml/atkvaedagreidslur/atkvaedagreidsla/?numer=68284</xml>
+</nánar>
+</atkvæðagreiðsla>
+<atkvæðagreiðsla  málsnúmer='1' þingnúmer='157'			málsflokkur='A' atkvæðagreiðslunúmer='68544'>
+<mál málsnúmer='1' þingnúmer='157' málsflokkur='A'>
+<málsheiti>fjárlög 2026</málsheiti><html>https://www.althingi.is/thingstorf/thingmalalistar-eftir-thingum/ferill/?ltg=157&amp;mnr=1</html>
+<xml>https://www.althingi.is/altext/xml/thingmalalisti/thingmal/?lthing=157&amp;malnr=1</xml>
+</mál><tími>2025-12-05T14:37:52</tími>
+<fundur>42</fundur>
+<tegund tegund='bt'>Brtt.</tegund><þingskjal skjalsnúmer='467' þingnúmer='157'>
+<slóð>
+<xml>https://www.althingi.is/altext/xml/thingskjol/thingskjal/?lthing=157&amp;skjalnr=467</xml>
+</slóð>
+</þingskjal>
+<nánar><![CDATA[3]]></nánar>
+<samantekt><aðferð>nafnakall</aðferð>
+<já><fjöldi>20</fjöldi></já>
+<nei><fjöldi>34</fjöldi></nei>
+<greiðirekkiatkvæði><fjöldi>4</fjöldi></greiðirekkiatkvæði>
+<afgreiðsla>Fellt</afgreiðsla>
+</samantekt>
+<nánar>
+<html>https://www.althingi.is/dba-bin/atkvgr.pl?nnafnak=68544</html>
+<xml>https://www.althingi.is/altext/xml/atkvaedagreidslur/atkvaedagreidsla/?numer=68544</xml>
+</nánar>
+</atkvæðagreiðsla>
+</atkvæðagreiðslur>

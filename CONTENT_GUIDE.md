@@ -117,6 +117,23 @@ Placeholders show the format and mark the gaps a human needs to fill. They:
 - use the pseudo-parties `X1`, `X2`, `X3` instead of real party letters (verified questions can't use these),
 - are never shown to players, only in local previews with `NEXT_PUBLIC_SHOW_PLACEHOLDERS=true`.
 
+## Writing vote questions from Alþingi data
+
+`npm run fetch-votes` downloads a session's votes from Alþingi's open data into `content/raw/` (details in [docs/althingi-data.md](docs/althingi-data.md)). It never writes questions. To turn a vote into a `vote_record` question:
+
+1. **Find a vote:** `npm run fetch-votes -- --session 157` lists every vote in the session with totals and outcome. Votes of type `lg` appear to be the vote on a bill as a whole.
+2. **Get the breakdown:** `npm run fetch-votes -- --session 157 --votes 69066` adds how each member and party voted.
+3. **Check it on althingi.is:** open the vote's `pageUrl` and confirm the totals and outcome there. That page is the source for the question, not the raw file.
+4. **Write the question by hand,** following the rules below.
+
+Rules for vote questions:
+
+- **Choose votes that matter,** such as the final vote on major bills or the budget. Don't choose a vote because it makes a party look bad. Over time, pick votes so every party is asked about about equally often.
+- **Name the vote precisely.** One issue can have dozens of votes (amendments, referrals, the final vote), so say which one: "lokaatkvæðagreiðsla um frumvarp til laga um …".
+- **Ask how a party voted only if its members present all voted the same way.** If the group split, ask about the overall outcome instead, or about the numbers.
+- **Tag every party the question asks about** in `parties`.
+- **State what happened, not why.** Don't explain a party's reasons in the prompt or the explanation.
+
 ## Review steps
 
 1. **Write**: add the question with `status: "placeholder"`, or replace a placeholder's content with the real question.

@@ -81,6 +81,14 @@ export function validateContent(input: ContentInput): ValidationResult {
       if (seen.has(party.letter)) error(input.parties.file, `duplicate party letter "${party.letter}"`);
       seen.add(party.letter);
     }
+    const groupOwner = new Map<number, string>();
+    for (const party of registry.parties) {
+      for (const groupId of party.althingiGroupIds ?? []) {
+        const owner = groupOwner.get(groupId);
+        if (owner) error(input.parties.file, `Alþingi group ${groupId} is listed for both ${owner} and ${party.letter}`);
+        groupOwner.set(groupId, party.letter);
+      }
+    }
     if (!registry.parties.some((p) => p.inBalanceCheck)) {
       warn(input.parties.file, "no party has inBalanceCheck: true, so the balance report checks nothing");
     }
