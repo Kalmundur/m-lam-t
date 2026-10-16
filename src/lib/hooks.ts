@@ -2,7 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { icelandToday } from "./content/availability";
-import { readStorage, subscribeStorage } from "./storage";
+import { isStorageAvailable, readStorage, subscribeStorage } from "./storage";
 
 // The site is prerendered at build time, so anything that depends on the
 // visitor (today's date, their stored progress) is read on the client only.
@@ -17,6 +17,13 @@ function subscribeToClock(onChange: () => void): () => void {
 /** Today's date in Iceland (YYYY-MM-DD), or null before the client has rendered. */
 export function useIcelandToday(): string | null {
   return useSyncExternalStore(subscribeToClock, () => icelandToday(), () => null);
+}
+
+const noSubscription = () => () => {};
+
+/** Whether progress can be saved in this browser. Assumed true until the client knows. */
+export function useStorageAvailable(): boolean {
+  return useSyncExternalStore(noSubscription, isStorageAvailable, () => true);
 }
 
 /** The raw stored string for a key; null if absent or storage is unavailable, undefined before the client has rendered. */

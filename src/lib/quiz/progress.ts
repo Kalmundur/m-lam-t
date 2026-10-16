@@ -81,3 +81,9 @@ export function addAnswer(record: DailyRecord, answer: ScoredAnswer): DailyRecor
 export function finishRecord(record: DailyRecord): DailyRecord {
   return { ...record, finished: true };
 }
+
+/** Finished, or every question answered (e.g. closed just before pressing "Sjá niðurstöður"). */
+export function isRecordComplete(record: DailyRecord | undefined): record is DailyRecord {
+  if (!record) return false;
+  return record.finished || (record.questionIds.length > 0 && record.answers.length >= record.questionIds.length);
+}

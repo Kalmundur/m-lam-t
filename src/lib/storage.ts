@@ -3,6 +3,25 @@
 // just without remembering anything.
 
 const listeners = new Set<() => void>();
+let available: boolean | undefined;
+
+/**
+ * Whether localStorage can be written. Checked once and cached: the probe
+ * writes a key, which would otherwise fire "storage" events in other tabs.
+ */
+export function isStorageAvailable(): boolean {
+  if (available === undefined) {
+    try {
+      const probe = "malamot.probe";
+      window.localStorage.setItem(probe, probe);
+      window.localStorage.removeItem(probe);
+      available = true;
+    } catch {
+      available = false;
+    }
+  }
+  return available;
+}
 
 export function readStorage(key: string): string | null {
   try {
