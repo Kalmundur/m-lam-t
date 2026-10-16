@@ -184,6 +184,71 @@ export const is = {
     missingQuestion: "Þessi spurning er ekki lengur í boði.",
     backHome: "Aftur á forsíðu",
   },
+
+  // Added in M3; not yet language-reviewed.
+  streak: (n: number) => `${n} ${plural(n, "dagur", "dagar")} í röð`,
+
+  storage: {
+    unavailable:
+      "Vafrinn þinn leyfir ekki vistun gagna, svo niðurstöður og dagaröð geymast ekki. Þú getur samt tekið prófið.",
+    saveFailed:
+      "Ekki tókst að vista framvinduna. Þú getur klárað prófið, en niðurstaðan gleymist þegar þú lokar síðunni.",
+  },
+
+  share: {
+    title: "Deildu niðurstöðunni",
+    hint: "Textinn sýnir ekki svörin, svo þú spillir engu fyrir öðrum.",
+    text: (date: string, points: number, max: number, squares: string) =>
+      `Málamót ${date} ${points}/${max} ${squares}`,
+    share: "Deila",
+    copy: "Afrita",
+    copied: "Afritað!",
+    copyFailed: "Ekki tókst að afrita. Veldu textann og afritaðu hann handvirkt.",
+  },
+
+  nav: {
+    about: "Um Málamót",
+  },
+
+  about: {
+    title: "Um Málamót",
+    intro:
+      "Málamót er spurningaleikur um íslensk stjórnmál. Markmiðið er að hjálpa fólki að læra meira um flokkana, stefnumál þeirra, atkvæðagreiðslur á Alþingi og hvernig kosningakerfið virkar.",
+    neutralityTitle: "Hlutleysi",
+    neutrality: [
+      "Málamót segir þér aldrei hvaða flokk þú ættir að kjósa eða hvaða flokki þú ert sammála.",
+      "Flokkum er hvorki gefin einkunn né raðað eftir ágæti.",
+      "Við spyrjum aldrei um skoðanir þínar. Niðurstaðan lýsir aðeins þekkingu þinni.",
+      "Spurningar sem varða tiltekinn flokk eru merktar honum. Sjálfvirk athugun telur hversu margar spurningar varða hvern flokk á Alþingi og varar við ef einhver flokkur fær mun meiri eða minni athygli en hinir.",
+      "Í dagsins prófi eru ekki tvær spurningar um sama flokk ef hægt er að komast hjá því.",
+    ],
+    sourcesTitle: "Hvaðan koma spurningarnar?",
+    sources: [
+      "Hverri spurningu fylgir stutt útskýring og heimild sem þú getur skoðað.",
+      "Við notum frumheimildir þegar þær eru til: althingi.is, island.is, stjornarradid.is, Hagstofu Íslands og stefnuskrár flokkanna sjálfra.",
+      "Hver spurning er borin saman við heimildina áður en hún birtist.",
+      "Staðreyndir sem geta breyst, til dæmis hver gegnir embætti, fá gildistíma. Þegar hann rennur út hverfur spurningin þar til hún hefur verið yfirfarin aftur.",
+    ],
+    reportTitle: "Fannstu villu?",
+    report:
+      "Undir hverri spurningu er hlekkurinn „Tilkynna villu“. Hann opnar tölvupóst þar sem auðkenni spurningarinnar er þegar komið inn. Þú getur líka skrifað okkur beint:",
+    privacyTitle: "Persónuvernd",
+    privacy: [
+      "Málamót notar hvorki notendaaðganga, vafrakökur né vefmælingar.",
+      "Svör þín, niðurstöður og dagaröð eru aðeins geymd í vafranum þínum og eru aldrei send neitt.",
+    ],
+  },
+
+  notFound: {
+    title: "Síðan fannst ekki",
+    text: "Þessi síða er ekki til. Kannski er slóðin vitlaus.",
+  },
+
+  error: {
+    title: "Eitthvað fór úrskeiðis",
+    text: "Villa kom upp þegar síðan var birt.",
+    retry: "Reyna aftur",
+  },
 } as const;
 
 export type Messages = typeof is;

@@ -10,6 +10,15 @@ export function Loading() {
   );
 }
 
+/** Tells the player their progress isn't being saved; the quiz itself still works. */
+export function StorageNotice({ text }: { text: string }) {
+  return (
+    <p role="status" className="rounded-xl border border-line bg-card p-4 text-sm" data-testid="storage-notice">
+      {text}
+    </p>
+  );
+}
+
 /** A short message with a way out, e.g. when there are no questions to play. */
 export function EmptyState({ text, href, linkText }: { text: string; href: string; linkText: string }) {
   return (
