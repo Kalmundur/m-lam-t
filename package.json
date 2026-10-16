@@ -17,7 +17,8 @@
     "balance": "tsx scripts/balance-report.ts",
     "serve": "tsx scripts/serve-static.ts",
     "test:e2e": "playwright test",
-    "lighthouse": "tsx scripts/lighthouse.ts"
+    "lighthouse": "tsx scripts/lighthouse.ts",
+    "fetch-votes": "tsx scripts/fetch-votes.ts"
   },
   "dependencies": {
     "next": "16.4.2",
@@ -35,6 +36,7 @@
     "chrome-launcher": "^1.2.2",
     "eslint": "^9",
     "eslint-config-next": "16.4.2",
+    "fast-xml-parser": "^5.11.2",
     "lighthouse": "^13.5.0",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",

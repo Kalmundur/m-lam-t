@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<atkvæðagreiðsla  málsnúmer='111' þingnúmer='157' atkvæðagreiðslunúmer='69066' málsflokkur='A'>
+<!-- greiðir ekki atkvæði er oft kallað að sitja hjá - þingmaðurinn var í þingsalnum og ýtti á takkann greiðir ekki atkvæði -->
+<!-- boðaði fjarvist, þingmaðurinn tilkynnti t.d. veikindi eða var í erindigjörðum á vegum Alþingis -->
+<!-- fjarverandi, þingmaðurinn ýtti ekki á takka og hafði ekki boðað fjarvist -->
+
+<mál málsnúmer='111' þingnúmer='157' málsflokkur='A'>
+<málsheiti>sýslumaður</málsheiti><html>https://www.althingi.is/thingstorf/thingmalalistar-eftir-thingum/ferill/?ltg=157&amp;mnr=111</html>
+<xml>https://www.althingi.is/altext/xml/thingmalalisti/thingmal/?lthing=157&amp;malnr=111</xml>
+</mál><tími>2026-02-02T17:59:28</tími>
+<fundur>65</fundur>
+<tegund tegund='lg'>Frv.</tegund><þingskjal skjalsnúmer='111' þingnúmer='157'>
+<slóð>
+<xml>https://www.althingi.is/altext/xml/thingskjol/thingskjal/?lthing=157&amp;skjalnr=111</xml>
+</slóð>
+</þingskjal>
+<niðurstaða><aðferð>atkvæðagreiðslukerfi</aðferð>
+<já><fjöldi>32</fjöldi></já>
+<nei><fjöldi>11</fjöldi></nei>
+<greiðirekkiatkvæði><fjöldi>9</fjöldi></greiðirekkiatkvæði>
+<niðurstaða>samþykkt</niðurstaða>
+</niðurstaða>
+<atkvæðaskrá><þingmaður id='1510'><nafn>Alma D. Möller</nafn><atkvæði>já</atkvæði><xml>https://www.althingi.is/altext/xml/thingmenn/thingmadur/?nr=1510</xml></þingmaður>
+<þingmaður id='1004'><nafn>Arna Lára Jónsdóttir</nafn><atkvæði>já</atkvæði><xml>https://www.althingi.is/altext/xml/thingmenn/thingmadur/?nr=1004</xml></þingmaður>
+<þingmaður id='1327'><nafn>Bergþór Ólason</nafn><atkvæði>nei</atkvæði><xml>https://www.althingi.is/altext/xml/thingmenn/thingmadur/?nr=1327</xml></þingmaður>
+<þingmaður id='1039'><nafn>Bryndís Haraldsdóttir</nafn><atkvæði>fjarverandi</atkvæði><xml>https://www.althingi.is/altext/xml/thingmenn/thingmadur/?nr=1039</xml></þingmaður>
+<þingmaður id='1160'><nafn>Brynjar Níelsson</nafn><atkvæði>greiðir ekki atkvæði</atkvæði><xml>https://www.althingi.is/altext/xml/thingmenn/thingmadur/?nr=1160</xml></þingmaður>
+<þingmaður id='1414'><nafn>Diljá Mist Einarsdóttir</nafn><atkvæði>greiðir ekki atkvæði</atkvæði><xml>https://www.althingi.is/altext/xml/thingmenn/thingmadur/?nr=1414</xml></þingmaður>
+<þingmaður id='1253'><nafn>Eva Pandora Baldursdóttir</nafn><atkvæði>fjarverandi</atkvæði><xml>https://www.althingi.is/altext/xml/thingmenn/thingmadur/?nr=1253</xml></þingmaður>
+<þingmaður id='1516'><nafn>Halla Hrund Logadóttir</nafn><atkvæði>nei</atkvæði><xml>https://www.althingi.is/altext/xml/thingmenn/thingmadur/?nr=1516</xml></þingmaður>
+</atkvæðaskrá></atkvæðagreiðsla>
